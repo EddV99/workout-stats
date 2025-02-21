@@ -19,8 +19,8 @@ function Day({ day }: { day: string }) {
       ></input>
       <button onClick={handleButton}>Add</button>
       <ul>
-        {workouts.map((v) => {
-          return <li key={v}>{v}</li>;
+        {workouts.map((v, i) => {
+          return <li key={i}>{v}</li>;
         })}
       </ul>
     </div>
