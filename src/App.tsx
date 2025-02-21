@@ -1,12 +1,12 @@
 import './App.css'
-import Day from './components/Day/Day'
 import Header from './components/Header/Header'
+import Week from './components/Week/Week'
 
 function App() {
   return (
     <>
       <Header/>
-      <Day day='1'/>
+      <Week />
     </>
   )
 }
