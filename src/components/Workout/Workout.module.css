@@ -1,0 +1,10 @@
+#chooseButton{
+  padding-left: 8px;
+  background-color: white;
+  border: 0;
+  cursor: pointer;
+}
+
+#name {
+  font-size: 1.2rem;
+}

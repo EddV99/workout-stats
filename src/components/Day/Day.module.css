@@ -5,3 +5,21 @@
   width: fit-content;
   padding: 15px;
 }
+
+#container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#chooseButton{
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 0;
+  cursor: pointer;
+}
+
+#icon {
+  color: red;
+}

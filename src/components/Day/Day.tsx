@@ -1,13 +1,26 @@
 import Styles from "./Day.module.css";
 import { useState } from "react";
+import { muscleGroups } from "./../../muscle/body";
+import Workout from "../Workout/Workout";
+import { RxCross2 } from "react-icons/rx";
 
 function Day({ day }: { day: string }) {
   const [workout, setWorkout] = useState<string>("");
-  const [workouts, setWorkouts] = useState<string[]>([]);
+  const [workouts, setWorkouts] = useState<
+    { name: string; group: muscleGroups; id: string }[]
+  >([]);
 
-  const handleButton = () => {
-    setWorkouts([...workouts, workout]);
+  const handleAddButton = () => {
+    const key = workout + Date.now().toString();
+    setWorkouts([
+      ...workouts,
+      { name: workout, group: muscleGroups.NONE, id: key },
+    ]);
     setWorkout("");
+  };
+
+  const handleDeleteButton = (id: string) => {
+    setWorkouts(workouts.filter((item) => item.id !== id));
   };
 
   return (
@@ -17,10 +30,22 @@ function Day({ day }: { day: string }) {
         value={workout}
         onChange={(e) => setWorkout(e.target.value)}
       ></input>
-      <button onClick={handleButton}>Add</button>
+      <button onClick={handleAddButton}>Add</button>
       <ul>
-        {workouts.map((v, i) => {
-          return <li key={i}>{v}</li>;
+        {workouts.map((v) => {
+          return (
+            <div id={Styles.container} key={v.id}>
+              <li>
+                <Workout name={v.name} />
+              </li>
+              <button
+                id={Styles.chooseButton}
+                onClick={() => handleDeleteButton(v.id)}
+              >
+                <RxCross2 id={Styles.icon} size="1.5rem" />
+              </button>
+            </div>
+          );
         })}
       </ul>
     </div>
