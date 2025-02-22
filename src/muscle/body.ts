@@ -9,6 +9,11 @@ export enum muscleGroups {
   TRICEP = "Tricep",
   SHOULDER = "Shoulder",
   TRAP = "Traps",
+  LATS = "Lats",
+  FOREARM = "Forarms",
+  NECK = "Neck",
+  ADDUCTOR = "Adductors",
+  THIGH = "Thighs",
+  HAMSTRING = "Hamstring",
   NONE = "N/A",
 }
-

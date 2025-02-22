@@ -8,3 +8,16 @@
 #name {
   font-size: 1.2rem;
 }
+
+.bodyIcons {
+  width: 2.5rem;
+}
+
+.dropdown {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  border: solid 1px; 
+  width: 200px;
+  height: fit-content;
+}
