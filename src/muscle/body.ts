@@ -15,5 +15,9 @@ export enum muscleGroups {
   ADDUCTOR = "Adductors",
   THIGH = "Thighs",
   HAMSTRING = "Hamstring",
+  UPPER_FRONT = "Upper Front",
+  UPPER_BACK = "Upper Back",
+  LOWER_FRONT = "Lower Front",
+  LOWER_BACK = "Lower Back",
   NONE = "N/A",
 }

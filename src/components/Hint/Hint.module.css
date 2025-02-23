@@ -1,0 +1,19 @@
+.hint {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  top: -5px;
+  right: 105%;
+  z-index: 1;
+}
+
+.container:hover .hint {
+  visibility: visible;
+}

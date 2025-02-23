@@ -31,12 +31,12 @@ function Day({ day }: { day: string }) {
         onChange={(e) => setWorkout(e.target.value)}
       ></input>
       <button onClick={handleAddButton}>Add</button>
-      <ul>
+      <ul className={Styles.list}>
         {workouts.map((v) => {
           return (
             <div id={Styles.container} key={v.id}>
-              <li>
-                <Workout name={v.name} />
+              <li className={Styles.listItem}>
+                <Workout group={v.group} name={v.name} />
               </li>
               <button
                 id={Styles.chooseButton}
