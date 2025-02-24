@@ -10,13 +10,19 @@ function Day({ day }: { day: string }) {
     { name: string; group: muscleGroups; id: string }[]
   >([]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleAddButton();
+  };
+
   const handleAddButton = () => {
-    const key = workout + Date.now().toString();
-    setWorkouts([
-      ...workouts,
-      { name: workout, group: muscleGroups.NONE, id: key },
-    ]);
-    setWorkout("");
+    if (workout.length > 0) {
+      const key = workout + Date.now().toString();
+      setWorkouts([
+        ...workouts,
+        { name: workout, group: muscleGroups.NONE, id: key },
+      ]);
+      setWorkout("");
+    }
   };
 
   const handleDeleteButton = (id: string) => {
@@ -25,10 +31,11 @@ function Day({ day }: { day: string }) {
 
   return (
     <div id={Styles.day}>
-      <h4>Day {day}</h4>
+      <h4 id={Styles.dayTitle}>Day {day}</h4>
       <input
         value={workout}
         onChange={(e) => setWorkout(e.target.value)}
+        onKeyDown={handleKeyDown}
       ></input>
       <button onClick={handleAddButton}>Add</button>
       <ul className={Styles.list}>

@@ -5,6 +5,10 @@
   width: fit-content;
   padding: 15px;
 }
+#dayTitle {
+  text-align: center;
+  border-bottom: solid 1px;
+}
 
 #container {
   display: flex;
