@@ -18,3 +18,7 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+#viewDetails {
+  text-align: end;
+}

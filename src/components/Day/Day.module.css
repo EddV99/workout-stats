@@ -5,7 +5,8 @@
   width: fit-content;
   padding: 15px;
 }
-#dayTitle {
+
+#title {
   text-align: center;
   border-bottom: solid 1px;
 }
