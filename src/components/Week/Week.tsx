@@ -9,12 +9,9 @@ function Week() {
   return (
     <>
       <div id={Styles.container}>
-        <EditableText text={title} setText={setTitle} />
-        <input
-          id={Styles.title}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <div id={Styles.title}>
+          <EditableText text={title} setText={setTitle} />
+        </div>
         <div id={Styles.week}>
           <Day day="1" />
           <Day day="2" />

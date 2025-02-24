@@ -43,7 +43,7 @@ function Day({ day }: { day: string }) {
           return (
             <div id={Styles.container} key={v.id}>
               <li className={Styles.listItem}>
-                <Workout group={v.group} name={v.name} />
+                <Workout group={v.group} initialName={v.name} />
               </li>
               <button
                 id={Styles.chooseButton}

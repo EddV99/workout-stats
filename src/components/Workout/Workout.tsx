@@ -25,6 +25,7 @@ import lowerBackGlutesIcon from "./../../assets/body-icons/lower-back/lower-body
 import lowerBackHamstringsIcon from "./../../assets/body-icons/lower-back/lower-body-back-hamstrings.svg";
 import { useState } from "react";
 import Hint from "../Hint/Hint";
+import EditableText from "../EditableText/EditableText";
 
 function Icons(handleChange: (group: muscleGroups) => void) {
   return (
@@ -159,9 +160,16 @@ function Icons(handleChange: (group: muscleGroups) => void) {
   );
 }
 
-function Workout({ name, group }: { name: string; group: muscleGroups }) {
+function Workout({
+  initialName,
+  group,
+}: {
+  initialName: string;
+  group: muscleGroups;
+}) {
   const [open, setOpen] = useState(false);
   const [newGroup, setGroup] = useState(group);
+  const [name, setName] = useState(initialName);
 
   const handleButton = () => {
     setOpen((o) => !o);
@@ -229,7 +237,9 @@ function Workout({ name, group }: { name: string; group: muscleGroups }) {
 
   return (
     <div className={Styles.container}>
-      <span id={Styles.name}>{name}</span>
+      <div id={Styles.name}>
+        <EditableText text={name} setText={setName} />
+      </div>
       <button id={Styles.chooseButton} onClick={handleButton}>
         {chooseIcon(newGroup)}
         {open ? Icons(handleChange) : null}
