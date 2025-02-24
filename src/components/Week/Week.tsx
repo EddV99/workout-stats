@@ -21,8 +21,8 @@ function Week() {
           <Day day="6" />
           <Day day="7" />
         </div>
+        <span id={Styles.viewDetails}>View Details</span>
       </div>
-      <span id={Styles.viewDetails}>View Details</span>
     </>
   );
 }

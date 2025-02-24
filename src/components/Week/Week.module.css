@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: fit-content;
 }
 
 #title {
@@ -19,5 +20,7 @@
 }
 
 #viewDetails {
+  margin-top: 15px;
+  width: 100%;
   text-align: end;
 }
