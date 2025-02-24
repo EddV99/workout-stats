@@ -3,9 +3,9 @@ import { MdEdit } from "react-icons/md";
 import Styles from "./EditableText.module.css";
 interface Props {
   text: string;
-  setText: (t: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-function EditableText({ text, setText }: Props) {
+function EditableText({ text, onChange }: Props) {
   const [editing, setEditing] = useState(false);
   const editRef = useRef<HTMLInputElement>(null);
 
@@ -24,7 +24,7 @@ function EditableText({ text, setText }: Props) {
           <input
             ref={editRef}
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={onChange}
             onKeyDown={handleEnter}
             onBlur={() => {
               if (text) setEditing(false);

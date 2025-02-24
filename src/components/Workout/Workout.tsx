@@ -26,6 +26,7 @@ import lowerBackHamstringsIcon from "./../../assets/body-icons/lower-back/lower-
 import { useState } from "react";
 import Hint from "../Hint/Hint";
 import EditableText from "../EditableText/EditableText";
+import { Stats } from "../Week/Week";
 
 function Icons(handleChange: (group: muscleGroups) => void) {
   return (
@@ -160,13 +161,15 @@ function Icons(handleChange: (group: muscleGroups) => void) {
   );
 }
 
-function Workout({
-  initialName,
-  group,
-}: {
+interface Props {
+  id: string;
   initialName: string;
   group: muscleGroups;
-}) {
+  stats: Stats;
+  setStats: React.Dispatch<React.SetStateAction<Stats>>;
+}
+
+function Workout({ id, initialName, group, stats, setStats }: Props) {
   const [open, setOpen] = useState(false);
   const [newGroup, setGroup] = useState(group);
   const [name, setName] = useState(initialName);
@@ -176,6 +179,16 @@ function Workout({
   };
 
   const handleChange = (group: muscleGroups) => {
+    setStats({
+      ...stats,
+      workouts: stats.workouts.map((w) => {
+        const workout = { ...w };
+        if (w.id === id) {
+          workout.group = group;
+        }
+        return workout;
+      }),
+    });
     setGroup(group);
   };
 
@@ -238,7 +251,22 @@ function Workout({
   return (
     <div className={Styles.container}>
       <div id={Styles.name}>
-        <EditableText text={name} setText={setName} />
+        <EditableText
+          text={name}
+          onChange={(e) => {
+            setStats({
+              ...stats,
+              workouts: stats.workouts.map((w) => {
+                const workout = { ...w };
+                if (w.id === id) {
+                  workout.name = e.target.value;
+                }
+                return workout;
+              }),
+            });
+            setName(e.target.value);
+          }}
+        />
       </div>
       <button id={Styles.chooseButton} onClick={handleButton}>
         {chooseIcon(newGroup)}

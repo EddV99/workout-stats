@@ -3,38 +3,53 @@ import { useState } from "react";
 import { muscleGroups } from "./../../muscle/body";
 import Workout from "../Workout/Workout";
 import { RxCross2 } from "react-icons/rx";
+import { Stats } from "../Week/Week";
 
-function Day({ day }: { day: string }) {
-  const [workout, setWorkout] = useState<string>("");
+interface Props {
+  day: string;
+  stats: Stats;
+  setStats: React.Dispatch<React.SetStateAction<Stats>>;
+}
+
+function Day({ day, stats, setStats }: Props) {
+  const [workoutName, setWorkoutName] = useState<string>("");
   const [workouts, setWorkouts] = useState<
-    { name: string; group: muscleGroups; id: string }[]
-  >([]);
+    { day: string; name: string; group: muscleGroups; id: string }[]
+  >(stats.workouts.filter((item) => item.day === day) || []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleAddButton();
   };
 
   const handleAddButton = () => {
-    if (workout.length > 0) {
-      const key = workout + Date.now().toString();
-      setWorkouts([
-        ...workouts,
-        { name: workout, group: muscleGroups.NONE, id: key },
-      ]);
-      setWorkout("");
+    if (workoutName.length > 0) {
+      const key = workoutName + Date.now().toString();
+      const newWorkout = {
+        day: day,
+        name: workoutName,
+        group: muscleGroups.NONE,
+        id: key,
+      };
+      setWorkouts([...workouts, newWorkout]);
+      setStats({ ...stats, workouts: [...stats.workouts, { ...newWorkout }] });
+      setWorkoutName("");
     }
   };
 
   const handleDeleteButton = (id: string) => {
     setWorkouts(workouts.filter((item) => item.id !== id));
+    setStats({
+      ...stats,
+      workouts: stats.workouts.filter((item) => item.id !== id),
+    });
   };
 
   return (
     <div id={Styles.day}>
       <h4 id={Styles.dayTitle}>Day {day}</h4>
       <input
-        value={workout}
-        onChange={(e) => setWorkout(e.target.value)}
+        value={workoutName}
+        onChange={(e) => setWorkoutName(e.target.value)}
         onKeyDown={handleKeyDown}
       ></input>
       <button onClick={handleAddButton}>Add</button>
@@ -43,7 +58,13 @@ function Day({ day }: { day: string }) {
           return (
             <div id={Styles.container} key={v.id}>
               <li className={Styles.listItem}>
-                <Workout group={v.group} initialName={v.name} />
+                <Workout
+                  id={v.id}
+                  group={v.group}
+                  initialName={v.name}
+                  stats={stats}
+                  setStats={setStats}
+                />
               </li>
               <button
                 id={Styles.chooseButton}
