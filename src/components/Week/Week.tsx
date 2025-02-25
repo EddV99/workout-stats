@@ -21,7 +21,8 @@ function Week({ id, loadStat }: Props) {
 
   useEffect(() => {
     localStorage.setItem(id, JSON.stringify(stats));
-  }, [stats]);
+  }, [id, stats]);
+  const [copyId, setCopyId] = useState("");
 
   return (
     <>
@@ -36,13 +37,55 @@ function Week({ id, loadStat }: Props) {
           />
         </div>
         <div id={Styles.week}>
-          <Day day="1" stats={stats} setStats={setStats} />
-          <Day day="2" stats={stats} setStats={setStats} />
-          <Day day="3" stats={stats} setStats={setStats} />
-          <Day day="4" stats={stats} setStats={setStats} />
-          <Day day="5" stats={stats} setStats={setStats} />
-          <Day day="6" stats={stats} setStats={setStats} />
-          <Day day="7" stats={stats} setStats={setStats} />
+          <Day
+            day="1"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
+          <Day
+            day="2"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
+          <Day
+            day="3"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
+          <Day
+            day="4"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
+          <Day
+            day="5"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
+          <Day
+            day="6"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
+          <Day
+            day="7"
+            copyId={copyId}
+            setCopyId={setCopyId}
+            stats={stats}
+            setStats={setStats}
+          />
         </div>
         <Link id={Styles.viewDetails} to={`/details/${id}`}>
           View Details
