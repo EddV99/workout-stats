@@ -7,12 +7,15 @@ interface Statistics {
   hasData: boolean;
   // count of times done in a week
   weeklyCount: number;
+  // count of total workouts done
+  count: number; 
 }
+
 function DetailsPage() {
   const parseStats = (data: Stats, g: muscleGroups): Statistics => {
     const filtered = data.workouts.filter((w) => w.group === g);
     if (filtered.length <= 0) {
-      return { hasData: false, weeklyCount: 0 };
+      return { hasData: false, weeklyCount: 0, count: 0};
     }
 
     const seen: string[] = [];
@@ -24,7 +27,7 @@ function DetailsPage() {
       }
     });
 
-    return { hasData: true, weeklyCount };
+    return { hasData: true, weeklyCount, count: filtered.length };
   };
 
   const { id } = useParams();
@@ -37,7 +40,11 @@ function DetailsPage() {
   }
   if (json) {
     const stats = parseStats(json, muscleGroups.ABS);
-    return <>You do abs {stats.weeklyCount} times a week</>;
+    return (<>
+      You do {muscleGroups.ABS} {stats.weeklyCount} times a week
+
+      You do {stats.count} {muscleGroups.ABS} exercies total 
+    </>);
   } else {
     return <>No data</>;
   }
