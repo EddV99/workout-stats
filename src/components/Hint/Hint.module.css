@@ -1,4 +1,9 @@
 .hint {
+  position: absolute;
+  bottom: 105%;
+  left: -20px;
+  z-index: 1;
+
   visibility: hidden;
   width: 120px;
   background-color: black;
@@ -6,12 +11,6 @@
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
-
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  top: -5px;
-  right: 105%;
-  z-index: 1;
 }
 
 .container:hover .hint {

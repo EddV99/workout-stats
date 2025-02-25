@@ -6,7 +6,7 @@ function Hint({ hint, children }: Props) {
   return (
     <div className={Styles.container}>
       {children}
-      <div className={Styles.hint}>{hint}</div>
+      <span className={Styles.hint}>{hint}</span>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { FaRegCopy } from "react-icons/fa";
 import { MdContentPaste } from "react-icons/md";
 import { Stats } from "../Week/Week";
+import Hint from "../Hint/Hint";
 
 interface Props {
   day: string;
@@ -27,6 +28,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
 
   const handleAddButton = () => {
     if (workoutName.length > 0) {
+      setWorkoutName((w) => w.trim());
       const key = workoutName + Date.now().toString();
       const newWorkout = {
         day: day,
@@ -72,13 +74,17 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
     <div id={Styles.day}>
       <div id={Styles.header}>
         <h4 id={Styles.dayTitle}>Day {day}</h4>
-        <div>
-          <button onClick={handleCopy}>
-            <FaRegCopy size="1.2rem" />
-          </button>
-          <button onClick={handlePaste}>
-            <MdContentPaste size="1.2rem" />
-          </button>
+        <div id={Styles.tools}>
+          <Hint hint="Copy">
+            <button onClick={handleCopy}>
+              <FaRegCopy size="1.2rem" />
+            </button>
+          </Hint>
+          <Hint hint="Paste">
+            <button onClick={handlePaste}>
+              <MdContentPaste size="1.2rem" />
+            </button>
+          </Hint>
         </div>
       </div>
       <input

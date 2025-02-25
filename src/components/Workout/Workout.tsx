@@ -1,7 +1,5 @@
 import Styles from "./Workout.module.css";
 import { RxValueNone } from "react-icons/rx";
-import { FaRegCopy } from "react-icons/fa";
-import { MdContentPaste } from "react-icons/md";
 import { muscleGroups } from "../../muscle/body";
 
 import upperBackDefaultIcon from "./../../assets/body-icons/upper-back/upper-body-back-default.svg";
