@@ -3,10 +3,11 @@ import Day from "../Day/Day";
 import { useEffect, useState } from "react";
 import EditableText from "../EditableText/EditableText";
 import { muscleGroups } from "../../muscle/body";
+import { Link } from "react-router";
 
 export interface Stats {
   title: string;
-  workouts: { day: string, name: string; group: muscleGroups; id: string }[];
+  workouts: { day: string; name: string; group: muscleGroups; id: string }[];
 }
 interface Props {
   id: string;
@@ -43,7 +44,9 @@ function Week({ id, loadStat }: Props) {
           <Day day="6" stats={stats} setStats={setStats} />
           <Day day="7" stats={stats} setStats={setStats} />
         </div>
-        <span id={Styles.viewDetails}>View Details</span>
+        <Link id={Styles.viewDetails} to={`/details/${id}`}>
+          View Details
+        </Link>
       </div>
     </>
   );
