@@ -1,6 +1,6 @@
 import Styles from "./Workout.module.css";
 import { RxValueNone } from "react-icons/rx";
-import { muscleGroups } from "../../muscle/body";
+import { Muscle } from "../../muscle/body";
 
 import upperBackDefaultIcon from "./../../assets/body-icons/upper-back/upper-body-back-default.svg";
 import upperBackLatsIcon from "./../../assets/body-icons/upper-back/upper-body-back-lats.svg";
@@ -26,135 +26,135 @@ import lowerBackHamstringsIcon from "./../../assets/body-icons/lower-back/lower-
 import { useState } from "react";
 import Hint from "../Hint/Hint";
 import EditableText from "../EditableText/EditableText";
-import { Stats } from "../Week/Week";
+import { InternalData } from "../Week/Week";
 
-function Icons(handleChange: (group: muscleGroups) => void) {
+function Icons(handleChange: (group: Muscle) => void) {
   return (
     <div className={Styles.dropdown}>
-      <Hint hint={muscleGroups.UPPER_FRONT}>
+      <Hint hint={Muscle.UPPER_FRONT}>
         <img
           src={upperFrontDefaultIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.UPPER_FRONT)}
+          onClick={() => handleChange(Muscle.UPPER_FRONT)}
         />
       </Hint>
-      <Hint hint={muscleGroups.UPPER_BACK}>
+      <Hint hint={Muscle.UPPER_BACK}>
         <img
           src={upperBackDefaultIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.UPPER_BACK)}
+          onClick={() => handleChange(Muscle.UPPER_BACK)}
         />
       </Hint>
-      <Hint hint={muscleGroups.LOWER_FRONT}>
+      <Hint hint={Muscle.LOWER_FRONT}>
         <img
           src={lowerFrontDefaultIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.LOWER_FRONT)}
+          onClick={() => handleChange(Muscle.LOWER_FRONT)}
         />
       </Hint>
-      <Hint hint={muscleGroups.LOWER_BACK}>
+      <Hint hint={Muscle.LOWER_BACK}>
         <img
           src={lowerBackDefaultIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.LOWER_BACK)}
+          onClick={() => handleChange(Muscle.LOWER_BACK)}
         />
       </Hint>
-      <Hint hint={muscleGroups.CHEST}>
+      <Hint hint={Muscle.CHEST}>
         <img
           src={upperFrontChestIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.CHEST)}
+          onClick={() => handleChange(Muscle.CHEST)}
         />
       </Hint>
-      <Hint hint={muscleGroups.ABS}>
+      <Hint hint={Muscle.ABS}>
         <img
           src={upperFrontCoreIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.ABS)}
+          onClick={() => handleChange(Muscle.ABS)}
         />
       </Hint>
-      <Hint hint={muscleGroups.CAVLE}>
+      <Hint hint={Muscle.CAVLE}>
         <img
           src={lowerBackCalvesIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.CAVLE)}
+          onClick={() => handleChange(Muscle.CAVLE)}
         />
       </Hint>
-      <Hint hint={muscleGroups.GLUTE}>
+      <Hint hint={Muscle.GLUTE}>
         <img
           src={lowerBackGlutesIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.GLUTE)}
+          onClick={() => handleChange(Muscle.GLUTE)}
         />
       </Hint>
-      <Hint hint={muscleGroups.BICEP}>
+      <Hint hint={Muscle.BICEP}>
         <img
           src={upperFrontBicepIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.BICEP)}
+          onClick={() => handleChange(Muscle.BICEP)}
         />
       </Hint>
-      <Hint hint={muscleGroups.TRICEP}>
+      <Hint hint={Muscle.TRICEP}>
         <img
           src={upperBackTricepsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.TRICEP)}
+          onClick={() => handleChange(Muscle.TRICEP)}
         />
       </Hint>
-      <Hint hint={muscleGroups.SHOULDER}>
+      <Hint hint={Muscle.SHOULDER}>
         <img
           src={upperFrontShoulderIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.SHOULDER)}
+          onClick={() => handleChange(Muscle.SHOULDER)}
         />
       </Hint>
-      <Hint hint={muscleGroups.TRAP}>
+      <Hint hint={Muscle.TRAP}>
         <img
           src={upperBackTrapsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.TRAP)}
+          onClick={() => handleChange(Muscle.TRAP)}
         />
       </Hint>
-      <Hint hint={muscleGroups.LATS}>
+      <Hint hint={Muscle.LATS}>
         <img
           src={upperBackLatsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.LATS)}
+          onClick={() => handleChange(Muscle.LATS)}
         />
       </Hint>
-      <Hint hint={muscleGroups.FOREARM}>
+      <Hint hint={Muscle.FOREARM}>
         <img
           src={upperFrontForearmsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.FOREARM)}
+          onClick={() => handleChange(Muscle.FOREARM)}
         />
       </Hint>
-      <Hint hint={muscleGroups.NECK}>
+      <Hint hint={Muscle.NECK}>
         <img
           src={upperFrontNeckIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.NECK)}
+          onClick={() => handleChange(Muscle.NECK)}
         />
       </Hint>
-      <Hint hint={muscleGroups.ADDUCTOR}>
+      <Hint hint={Muscle.ADDUCTOR}>
         <img
           src={lowerFrontAdductorsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.ADDUCTOR)}
+          onClick={() => handleChange(Muscle.ADDUCTOR)}
         />
       </Hint>
-      <Hint hint={muscleGroups.THIGH}>
+      <Hint hint={Muscle.THIGH}>
         <img
           src={lowerFrontThighsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.THIGH)}
+          onClick={() => handleChange(Muscle.THIGH)}
         />
       </Hint>
-      <Hint hint={muscleGroups.HAMSTRING}>
+      <Hint hint={Muscle.HAMSTRING}>
         <img
           src={lowerBackHamstringsIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(muscleGroups.HAMSTRING)}
+          onClick={() => handleChange(Muscle.HAMSTRING)}
         />
       </Hint>
     </div>
@@ -164,9 +164,9 @@ function Icons(handleChange: (group: muscleGroups) => void) {
 interface Props {
   id: string;
   initialName: string;
-  group: muscleGroups;
-  stats: Stats;
-  setStats: React.Dispatch<React.SetStateAction<Stats>>;
+  group: Muscle;
+  stats: InternalData;
+  setStats: React.Dispatch<React.SetStateAction<InternalData>>;
 }
 
 function Workout({ id, initialName, group, stats, setStats }: Props) {
@@ -178,7 +178,7 @@ function Workout({ id, initialName, group, stats, setStats }: Props) {
     setOpen((o) => !o);
   };
 
-  const handleChange = (group: muscleGroups) => {
+  const handleChange = (group: Muscle) => {
     setStats({
       ...stats,
       workouts: stats.workouts.map((w) => {
@@ -192,57 +192,57 @@ function Workout({ id, initialName, group, stats, setStats }: Props) {
     setGroup(group);
   };
 
-  const chooseIcon = (group: muscleGroups) => {
+  const chooseIcon = (group: Muscle) => {
     switch (group) {
-      case muscleGroups.CHEST:
+      case Muscle.CHEST:
         return <img src={upperFrontChestIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.LEG:
+      case Muscle.LEG:
         return <img src={lowerFrontDefaultIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.BACK:
+      case Muscle.BACK:
         return <img src={upperBackDefaultIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.ABS:
+      case Muscle.ABS:
         return <img src={upperFrontCoreIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.CAVLE:
+      case Muscle.CAVLE:
         return <img src={lowerBackCalvesIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.GLUTE:
+      case Muscle.GLUTE:
         return <img src={lowerBackGlutesIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.BICEP:
+      case Muscle.BICEP:
         return <img src={upperFrontBicepIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.TRICEP:
+      case Muscle.TRICEP:
         return <img src={upperBackTricepsIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.SHOULDER:
+      case Muscle.SHOULDER:
         return (
           <img src={upperFrontShoulderIcon} className={Styles.bodyIcons} />
         );
-      case muscleGroups.TRAP:
+      case Muscle.TRAP:
         return <img src={upperBackTrapsIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.LATS:
+      case Muscle.LATS:
         return <img src={upperBackLatsIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.FOREARM:
+      case Muscle.FOREARM:
         return (
           <img src={upperFrontForearmsIcon} className={Styles.bodyIcons} />
         );
-      case muscleGroups.NECK:
+      case Muscle.NECK:
         return <img src={upperFrontNeckIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.ADDUCTOR:
+      case Muscle.ADDUCTOR:
         return (
           <img src={lowerFrontAdductorsIcon} className={Styles.bodyIcons} />
         );
-      case muscleGroups.THIGH:
+      case Muscle.THIGH:
         return <img src={lowerFrontThighsIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.HAMSTRING:
+      case Muscle.HAMSTRING:
         return (
           <img src={lowerBackHamstringsIcon} className={Styles.bodyIcons} />
         );
-      case muscleGroups.UPPER_FRONT:
+      case Muscle.UPPER_FRONT:
         return <img src={upperFrontDefaultIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.UPPER_BACK:
+      case Muscle.UPPER_BACK:
         return <img src={upperBackDefaultIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.LOWER_FRONT:
+      case Muscle.LOWER_FRONT:
         return <img src={lowerFrontDefaultIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.LOWER_BACK:
+      case Muscle.LOWER_BACK:
         return <img src={lowerBackDefaultIcon} className={Styles.bodyIcons} />;
-      case muscleGroups.NONE:
+      case Muscle.NONE:
       default:
         return <RxValueNone size="1.2rem" />;
     }

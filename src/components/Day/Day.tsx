@@ -1,25 +1,25 @@
 import Styles from "./Day.module.css";
 import { useState } from "react";
-import { muscleGroups } from "./../../muscle/body";
+import { Muscle } from "./../../muscle/body";
 import Workout from "../Workout/Workout";
 import { RxCross2 } from "react-icons/rx";
 import { FaRegCopy } from "react-icons/fa";
 import { MdContentPaste } from "react-icons/md";
-import { Stats } from "../Week/Week";
+import { InternalData } from "../Week/Week";
 import Hint from "../Hint/Hint";
 
 interface Props {
   day: string;
   copyId: string;
   setCopyId: React.Dispatch<React.SetStateAction<string>>;
-  stats: Stats;
-  setStats: React.Dispatch<React.SetStateAction<Stats>>;
+  stats: InternalData;
+  setStats: React.Dispatch<React.SetStateAction<InternalData>>;
 }
 
 function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
   const [workoutName, setWorkoutName] = useState<string>("");
   const [workouts, setWorkouts] = useState<
-    { day: string; name: string; group: muscleGroups; id: string }[]
+    { day: string; name: string; group: Muscle; id: string }[]
   >(stats.workouts.filter((item) => item.day === day) || []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       const newWorkout = {
         day: day,
         name: workoutName,
-        group: muscleGroups.NONE,
+        group: Muscle.NONE,
         id: key,
       };
       setWorkouts([...workouts, newWorkout]);

@@ -1,27 +1,34 @@
 import Styles from "./Week.module.css";
-import Day from "../Day/Day";
 import { useEffect, useState } from "react";
-import EditableText from "../EditableText/EditableText";
-import { muscleGroups } from "../../muscle/body";
 import { Link } from "react-router";
+import { muscleGroups } from "../../muscle/body";
+import EditableText from "../EditableText/EditableText";
+import Day from "../Day/Day";
 
-export interface Stats {
+/**
+ * Format of data saved to local storage
+ */
+export interface InternalData {
   title: string;
   workouts: { day: string; name: string; group: muscleGroups; id: string }[];
 }
+
 interface Props {
   id: string;
-  loadStat?: Stats;
+  loadStat?: InternalData;
 }
+
 function Week({ id, loadStat }: Props) {
   const [title, setTitle] = useState(loadStat?.title || "Workout");
-  const [stats, setStats] = useState<Stats>(
+  const [stats, setStats] = useState<InternalData>(
     loadStat || { title: title, workouts: [] },
   );
 
   useEffect(() => {
     localStorage.setItem(id, JSON.stringify(stats));
   }, [id, stats]);
+
+  // Hoisted up for Day components
   const [copyId, setCopyId] = useState("");
 
   return (
