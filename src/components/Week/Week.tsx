@@ -72,7 +72,6 @@ function Week({ id, data }: Props) {
               />
             );
           })}
-
           <button id={Styles.addButton} onClick={handleAddButton}>
             <IoMdAdd />
           </button>
