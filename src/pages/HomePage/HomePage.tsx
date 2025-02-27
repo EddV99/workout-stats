@@ -1,9 +1,9 @@
 import Header from "../../components/Header/Header";
-import Week, { Stats } from "../../components/Week/Week";
+import Week, { InternalData } from "../../components/Week/Week";
 import Styles from "./HomePage.module.css";
 
 function HomePage() {
-  const getOldStats = (id: string): Stats | undefined => {
+  const getOldStats = (id: string): InternalData | undefined => {
     const s = localStorage.getItem(id);
     if (s) {
       return JSON.parse(s);
@@ -16,7 +16,7 @@ function HomePage() {
     <>
       <Header />
       <div id={Styles.content}>
-        <Week id="1" loadStat={getOldStats("1")} />
+        <Week id="1" data={getOldStats("1")} />
       </div>
     </>
   );

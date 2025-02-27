@@ -2,6 +2,7 @@ import Styles from "./Week.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Muscle } from "../../muscle/body";
+import { IoMdAdd } from "react-icons/io";
 import EditableText from "../EditableText/EditableText";
 import Day from "../Day/Day";
 
@@ -15,13 +16,24 @@ export interface InternalData {
 
 interface Props {
   id: string;
-  loadStat?: InternalData;
+  data?: InternalData;
 }
 
-function Week({ id, loadStat }: Props) {
-  const [title, setTitle] = useState(loadStat?.title || "Workout");
+function Week({ id, data }: Props) {
+  const [title, setTitle] = useState(data?.title || "Workout");
+
+  const [maxDay, setMaxDays] = useState(
+    data && data.workouts.length > 0
+      ? Number(
+          data.workouts.reduce((max, c) => {
+            return Number(c.day) > Number(max.day) ? c : max;
+          }).day,
+        )
+      : 1,
+  );
+
   const [stats, setStats] = useState<InternalData>(
-    loadStat || { title: title, workouts: [] },
+    data || { title: title, workouts: [] },
   );
 
   useEffect(() => {
@@ -30,6 +42,10 @@ function Week({ id, loadStat }: Props) {
 
   // Hoisted up for Day components
   const [copyId, setCopyId] = useState("");
+
+  const handleAddButton = () => {
+    setMaxDays((d) => d + 1);
+  };
 
   return (
     <>
@@ -44,55 +60,22 @@ function Week({ id, loadStat }: Props) {
           />
         </div>
         <div id={Styles.week}>
-          <Day
-            day="1"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
-          <Day
-            day="2"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
-          <Day
-            day="3"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
-          <Day
-            day="4"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
-          <Day
-            day="5"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
-          <Day
-            day="6"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
-          <Day
-            day="7"
-            copyId={copyId}
-            setCopyId={setCopyId}
-            stats={stats}
-            setStats={setStats}
-          />
+          {[...Array(Number(maxDay))].map((v, i) => {
+            return (
+              <Day
+                key={v || i}
+                day={(i + 1).toString()}
+                copyId={copyId}
+                setCopyId={setCopyId}
+                stats={stats}
+                setStats={setStats}
+              />
+            );
+          })}
+
+          <button id={Styles.addButton} onClick={handleAddButton}>
+            <IoMdAdd />
+          </button>
         </div>
         <Link id={Styles.viewDetails} to={`/details/${id}`}>
           View Details
