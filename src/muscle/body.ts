@@ -10,7 +10,7 @@ export enum Muscle {
   SHOULDER = "Shoulder",
   TRAP = "Traps",
   LATS = "Lats",
-  FOREARM = "Forarms",
+  FOREARM = "Forearms",
   NECK = "Neck",
   ADDUCTOR = "Adductors",
   THIGH = "Thighs",
