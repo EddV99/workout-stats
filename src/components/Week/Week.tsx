@@ -1,7 +1,7 @@
 import Styles from "./Week.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { muscleGroups } from "../../muscle/body";
+import { Muscle } from "../../muscle/body";
 import EditableText from "../EditableText/EditableText";
 import Day from "../Day/Day";
 
@@ -10,7 +10,7 @@ import Day from "../Day/Day";
  */
 export interface InternalData {
   title: string;
-  workouts: { day: string; name: string; group: muscleGroups; id: string }[];
+  workouts: { day: string; name: string; group: Muscle; id: string }[];
 }
 
 interface Props {
