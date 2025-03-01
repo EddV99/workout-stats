@@ -10,8 +10,8 @@ import Hint from "../Hint/Hint";
 
 interface Props {
   day: number;
-  copyId: number;
-  setCopyId: React.Dispatch<React.SetStateAction<number>>;
+  copyId: number | undefined;
+  setCopyId: React.Dispatch<React.SetStateAction<number | undefined>>;
   stats: InternalData;
   setStats: React.Dispatch<React.SetStateAction<InternalData>>;
 }
