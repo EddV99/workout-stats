@@ -11,7 +11,7 @@ import Day from "../Day/Day";
  */
 export interface InternalData {
   title: string;
-  workouts: { day: string; name: string; group: Muscle; id: string }[];
+  workouts: { day: number; name: string; group: Muscle; id: string }[];
 }
 
 interface Props {
@@ -20,29 +20,27 @@ interface Props {
 }
 
 function Week({ id, data }: Props) {
-  const [title, setTitle] = useState(data?.title || "Workout");
-
+  // ------- state --------
   const [maxDay, setMaxDays] = useState(
     data && data.workouts.length > 0
-      ? Number(
-          data.workouts.reduce((max, c) => {
-            return Number(c.day) > Number(max.day) ? c : max;
-          }).day,
-        )
+      ? data.workouts.reduce((max, c) => {
+          return c.day > max.day ? c : max;
+        }).day
       : 1,
   );
-
   const [stats, setStats] = useState<InternalData>(
-    data || { title: title, workouts: [] },
+    data || { title: "Workout", workouts: [] },
   );
 
+  // ------- effect --------
   useEffect(() => {
     localStorage.setItem(id, JSON.stringify(stats));
   }, [id, stats]);
 
-  // Hoisted up for Day components
-  const [copyId, setCopyId] = useState("");
+  // ------- hoist --------
+  const [copyId, setCopyId] = useState<number | undefined>(undefined);
 
+  // ------- handle --------
   const handleAddButton = () => {
     setMaxDays((d) => d + 1);
   };
@@ -52,19 +50,18 @@ function Week({ id, data }: Props) {
       <div id={Styles.container}>
         <div id={Styles.title}>
           <EditableText
-            text={title}
+            text={stats.title}
             onChange={(e) => {
-              setTitle(e.target.value);
               setStats({ ...stats, title: e.target.value });
             }}
           />
         </div>
         <div id={Styles.week}>
-          {[...Array(Number(maxDay))].map((v, i) => {
+          {[...Array(maxDay)].map((v, i) => {
             return (
               <Day
                 key={v || i}
-                day={(i + 1).toString()}
+                day={i + 1}
                 copyId={copyId}
                 setCopyId={setCopyId}
                 stats={stats}

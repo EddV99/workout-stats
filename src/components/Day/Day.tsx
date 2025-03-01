@@ -9,45 +9,42 @@ import { InternalData } from "../Week/Week";
 import Hint from "../Hint/Hint";
 
 interface Props {
-  day: string;
-  copyId: string;
-  setCopyId: React.Dispatch<React.SetStateAction<string>>;
+  day: number;
+  copyId: number;
+  setCopyId: React.Dispatch<React.SetStateAction<number>>;
   stats: InternalData;
   setStats: React.Dispatch<React.SetStateAction<InternalData>>;
 }
 
 function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
-  const [workoutName, setWorkoutName] = useState<string>("");
-  const [workouts, setWorkouts] = useState<
-    { day: string; name: string; group: Muscle; id: string }[]
-  >(stats.workouts.filter((item) => item.day === day) || []);
+  // ------- state --------
+  const [newWorkoutName, setNewWorkoutName] = useState<string>("");
 
+  // ------- handle --------
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleAddButton();
   };
 
   const handleAddButton = () => {
-    if (workoutName.length > 0) {
-      setWorkoutName((w) => w.trim());
-      const key = workoutName + Date.now().toString();
+    if (newWorkoutName.length > 0) {
+      const key = newWorkoutName + Date.now().toString();
       const newWorkout = {
         day: day,
-        name: workoutName,
+        name: newWorkoutName,
         group: Muscle.NONE,
         id: key,
       };
-      setWorkouts([...workouts, newWorkout]);
       setStats({ ...stats, workouts: [...stats.workouts, { ...newWorkout }] });
-      setWorkoutName("");
+      setNewWorkoutName("");
     }
   };
 
   const handleCopy = () => {
     setCopyId(day);
   };
+
   const handlePaste = () => {
     if (copyId) {
-      setWorkouts(stats.workouts.filter((item) => item.day === copyId));
       setStats({
         ...stats,
         workouts: [
@@ -63,7 +60,6 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
   };
 
   const handleDeleteButton = (id: string) => {
-    setWorkouts(workouts.filter((item) => item.id !== id));
     setStats({
       ...stats,
       workouts: stats.workouts.filter((item) => item.id !== id),
@@ -88,33 +84,29 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
         </div>
       </div>
       <input
-        value={workoutName}
-        onChange={(e) => setWorkoutName(e.target.value)}
+        value={newWorkoutName}
+        onChange={(e) => setNewWorkoutName(e.target.value)}
         onKeyDown={handleKeyDown}
       ></input>
       <button onClick={handleAddButton}>Add</button>
       <ul className={Styles.list}>
-        {workouts.map((v) => {
-          return (
-            <div id={Styles.container} key={v.id}>
-              <li className={Styles.listItem}>
-                <Workout
-                  id={v.id}
-                  group={v.group}
-                  initialName={v.name}
-                  stats={stats}
-                  setStats={setStats}
-                />
-              </li>
-              <button
-                id={Styles.chooseButton}
-                onClick={() => handleDeleteButton(v.id)}
-              >
-                <RxCross2 id={Styles.icon} size="1.5rem" />
-              </button>
-            </div>
-          );
-        })}
+        {stats.workouts
+          .filter((i) => i.day === day)
+          .map((v) => {
+            return (
+              <div id={Styles.container} key={v.id}>
+                <li className={Styles.listItem}>
+                  <Workout id={v.id} stats={stats} setStats={setStats} />
+                </li>
+                <button
+                  id={Styles.chooseButton}
+                  onClick={() => handleDeleteButton(v.id)}
+                >
+                  <RxCross2 id={Styles.icon} size="1.5rem" />
+                </button>
+              </div>
+            );
+          })}
       </ul>
     </div>
   );

@@ -10,16 +10,12 @@ import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
 
 interface Props {
   id: string;
-  initialName: string;
-  group: Muscle;
   stats: InternalData;
   setStats: React.Dispatch<React.SetStateAction<InternalData>>;
 }
 
-function Workout({ id, initialName, group, stats, setStats }: Props) {
+function Workout({ id, stats, setStats }: Props) {
   const [open, setOpen] = useState(false);
-  const [newGroup, setGroup] = useState(group);
-  const [name, setName] = useState(initialName);
 
   const handleButton = () => {
     setOpen((o) => !o);
@@ -36,7 +32,6 @@ function Workout({ id, initialName, group, stats, setStats }: Props) {
         return workout;
       }),
     });
-    setGroup(group);
   };
 
   const chooseIcon = (group: Muscle) => {
@@ -139,28 +134,26 @@ function Workout({ id, initialName, group, stats, setStats }: Props) {
     }
   };
 
+  const thisWorkout = stats.workouts.filter((i) => i.id === id)[0];
   return (
     <div className={Styles.container}>
       <div id={Styles.name}>
         <EditableText
-          text={name}
+          text={thisWorkout.name}
           onChange={(e) => {
             setStats({
               ...stats,
               workouts: stats.workouts.map((w) => {
                 const workout = { ...w };
-                if (w.id === id) {
-                  workout.name = e.target.value;
-                }
+                if (w.id === id) workout.name = e.target.value;
                 return workout;
               }),
             });
-            setName(e.target.value);
           }}
         />
       </div>
       <button id={Styles.chooseButton} onClick={handleButton}>
-        {chooseIcon(newGroup)}
+        {chooseIcon(thisWorkout.group)}
         {open ? <MuscleGroupSelection handleChange={handleChange} /> : null}
       </button>
     </div>
