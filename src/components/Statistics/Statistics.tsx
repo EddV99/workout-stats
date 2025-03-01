@@ -4,8 +4,8 @@ import { InternalData } from "../Week/Week";
 interface ParsedData {
   // does this have any relevant data
   hasData: boolean;
-  // count of times done in a week
-  weeklyCount: number;
+  // count of days doing this muscle group
+  dayCount: number;
   // count of total workouts done
   count: number;
 }
@@ -18,39 +18,48 @@ function Statistics({ data }: Props) {
   const parseStats = (data: InternalData, g: Muscle): ParsedData => {
     const filtered = data.workouts.filter((w) => w.group === g);
     if (filtered.length <= 0) {
-      return { hasData: false, weeklyCount: 0, count: 0 };
+      return { hasData: false, dayCount: 0, count: 0 };
     }
 
     const seen: string[] = [];
-    let weeklyCount = 0;
+    let dayCount = 0;
     filtered.map((w) => {
       if (!seen.includes(w.day)) {
         seen.push(w.day);
-        weeklyCount++;
+        dayCount++;
       }
     });
 
-    return { hasData: true, weeklyCount, count: filtered.length };
+    return { hasData: true, dayCount: dayCount, count: filtered.length };
   };
 
-  if(data.workouts.length > 0){
-  return (
-    <>
-      {MuscleArray.map((k) => {
-        const stats = parseStats(data, k);
-        if (stats.hasData) {
-          return (
-            <p key={k}>
-              You do {k} {stats.weeklyCount} times a week <br />
-              You do {stats.count} {k} exercies total
-            </p>
-          );
-        } else {
-          return null;
-        }
-      })}
-    </>
-  );
+  const maxDay = data.workouts.reduce((i, c) => {
+    return Number(i.day) > Number(c.day) ? { ...i } : { ...c };
+  }).day;
+
+  if (data.workouts.length > 0) {
+    return (
+      <>
+        {MuscleArray.map((muscle, index) => {
+          const stats = parseStats(data, muscle);
+          if (stats.hasData) {
+            return (
+              <div key={muscle + index}>
+                <h1>{muscle}</h1>
+                <p>
+                  Work this muscle out {stats.dayCount} time(s) in a cycle of{" "}
+                  {maxDay} day(s)
+                  <br />
+                  You do a total of {stats.count} exercies total
+                </p>
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </>
+    );
   } else {
     return <>No data to parse</>;
   }
