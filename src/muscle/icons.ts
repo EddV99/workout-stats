@@ -19,6 +19,7 @@ import lowerBackDefaultIcon from "../assets/body-icons/lower-back/lower-body-bac
 import lowerBackCalvesIcon from "../assets/body-icons/lower-back/lower-body-back-calves.svg";
 import lowerBackGlutesIcon from "../assets/body-icons/lower-back/lower-body-back-glutes.svg";
 import lowerBackHamstringsIcon from "../assets/body-icons/lower-back/lower-body-back-hamstrings.svg";
+import { Muscle } from "./body";
 
 const icons = {
   upperBackDefaultIcon,
@@ -45,3 +46,48 @@ const icons = {
 };
 
 export default icons;
+
+export const muscleToIcon = (muscle: Muscle) => {
+  switch (muscle) {
+    case Muscle.CHEST:
+      return upperFrontChestIcon;
+    case Muscle.LEG:
+      return lowerFrontDefaultIcon;
+    case Muscle.BACK:
+      return upperBackDefaultIcon;
+    case Muscle.ABS:
+      return upperFrontCoreIcon;
+    case Muscle.CAVLE:
+      return lowerBackCalvesIcon;
+    case Muscle.GLUTE:
+      return lowerBackGlutesIcon;
+    case Muscle.BICEP:
+      return upperFrontBicepIcon;
+    case Muscle.TRICEP:
+      return upperBackTricepsIcon;
+    case Muscle.SHOULDER:
+      return upperFrontShoulderIcon;
+    case Muscle.TRAP:
+      return upperBackTrapsIcon;
+    case Muscle.LATS:
+      return upperBackLatsIcon;
+    case Muscle.FOREARM:
+      return upperFrontForearmsIcon;
+    case Muscle.NECK:
+      return upperFrontNeckIcon;
+    case Muscle.ADDUCTOR:
+      return lowerFrontAdductorsIcon;
+    case Muscle.THIGH:
+      return lowerFrontThighsIcon;
+    case Muscle.HAMSTRING:
+      return lowerBackHamstringsIcon;
+    case Muscle.UPPER_FRONT:
+      return upperFrontDefaultIcon;
+    case Muscle.UPPER_BACK:
+      return upperBackDefaultIcon;
+    case Muscle.LOWER_FRONT:
+      return lowerFrontDefaultIcon;
+    case Muscle.LOWER_BACK:
+      return lowerBackDefaultIcon;
+  }
+};
