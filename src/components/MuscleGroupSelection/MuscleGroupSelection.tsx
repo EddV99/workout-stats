@@ -52,11 +52,11 @@ function MuscleGroupSelection({ handleChange }: Props) {
           onClick={() => handleChange(Muscle.ABS)}
         />
       </Hint>
-      <Hint hint={Muscle.CAVLE}>
+      <Hint hint={Muscle.CALVE}>
         <img
-          src={icons.lowerBackCalvesIcon}
+          src={icons.lowerBackCalveIcon}
           className={Styles.bodyIcons}
-          onClick={() => handleChange(Muscle.CAVLE)}
+          onClick={() => handleChange(Muscle.CALVE)}
         />
       </Hint>
       <Hint hint={Muscle.GLUTE}>

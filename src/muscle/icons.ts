@@ -16,7 +16,7 @@ import lowerFrontAdductorsIcon from "../assets/body-icons/lower/lower-body-adduc
 import lowerFrontThighsIcon from "../assets/body-icons/lower/lower-body-thighs.svg";
 
 import lowerBackDefaultIcon from "../assets/body-icons/lower-back/lower-body-back-default.svg";
-import lowerBackCalvesIcon from "../assets/body-icons/lower-back/lower-body-back-calves.svg";
+import lowerBackCalveIcon from "../assets/body-icons/lower-back/lower-body-back-calves.svg";
 import lowerBackGlutesIcon from "../assets/body-icons/lower-back/lower-body-back-glutes.svg";
 import lowerBackHamstringsIcon from "../assets/body-icons/lower-back/lower-body-back-hamstrings.svg";
 import { Muscle } from "./body";
@@ -40,7 +40,7 @@ const icons = {
   lowerFrontThighsIcon,
 
   lowerBackDefaultIcon,
-  lowerBackCalvesIcon,
+  lowerBackCalveIcon,
   lowerBackGlutesIcon,
   lowerBackHamstringsIcon,
 };
@@ -57,8 +57,8 @@ export const muscleToIcon = (muscle: Muscle) => {
       return upperBackDefaultIcon;
     case Muscle.ABS:
       return upperFrontCoreIcon;
-    case Muscle.CAVLE:
-      return lowerBackCalvesIcon;
+    case Muscle.CALVE:
+      return lowerBackCalveIcon;
     case Muscle.GLUTE:
       return lowerBackGlutesIcon;
     case Muscle.BICEP:

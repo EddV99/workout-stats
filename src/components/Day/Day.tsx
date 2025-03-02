@@ -2,11 +2,13 @@ import Styles from "./Day.module.css";
 import { useState } from "react";
 import { Muscle } from "./../../muscle/body";
 import Workout from "../Workout/Workout";
-import { RxCross2 } from "react-icons/rx";
+import { RxCross2, RxValueNone } from "react-icons/rx";
 import { FaRegCopy } from "react-icons/fa";
 import { MdContentPaste } from "react-icons/md";
 import { InternalData } from "../Week/Week";
 import Hint from "../Hint/Hint";
+import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
+import { muscleToIcon } from "../../muscle/icons";
 
 interface Props {
   day: number;
@@ -18,9 +20,13 @@ interface Props {
 
 function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
   // ------- state --------
+  const [open, setOpen] = useState(false);
   const [newWorkoutName, setNewWorkoutName] = useState<string>("");
   const [newWorkoutReps, setNewWorkoutReps] = useState(0);
   const [newWorkoutSets, setNewWorkoutSets] = useState(0);
+  const [newWorkoutMuscleGroup, setNewWorkoutMuscleGroup] = useState(
+    Muscle.NONE,
+  );
 
   // ------- handle --------
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -33,13 +39,14 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       const newWorkout = {
         day: day,
         name: newWorkoutName,
-        group: Muscle.NONE,
+        group: newWorkoutMuscleGroup,
         sets: newWorkoutSets,
         reps: newWorkoutReps,
         id: key,
       };
       setStats({ ...stats, workouts: [...stats.workouts, { ...newWorkout }] });
       setNewWorkoutName("");
+      setNewWorkoutMuscleGroup(Muscle.NONE);
     }
   };
 
@@ -68,6 +75,15 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       ...stats,
       workouts: stats.workouts.filter((item) => item.id !== id),
     });
+  };
+
+  const handleMuscleGroupDropdown = () => {
+    setOpen((o) => !o);
+  };
+
+  const chooseIcon = (group: Muscle) => {
+    if (group === Muscle.NONE) return <RxValueNone size="1.2rem" />;
+    return <img src={muscleToIcon(group)} className={Styles.bodyIcons} />;
   };
 
   return (
@@ -122,6 +138,19 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
             step="1"
             placeholder="# of Sets"
           />
+        </div>
+        <div id={Styles.infoRow}>
+          Muscle Group:
+          <button id={Styles.chooseButton} onClick={handleMuscleGroupDropdown}>
+            {chooseIcon(newWorkoutMuscleGroup)}
+            {open ? (
+              <MuscleGroupSelection
+                handleChange={(m) => {
+                  setNewWorkoutMuscleGroup(m);
+                }}
+              />
+            ) : null}
+          </button>
         </div>
         <button onClick={handleAddButton}>Add</button>
       </div>
