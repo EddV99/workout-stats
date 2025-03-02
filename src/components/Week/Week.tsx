@@ -11,7 +11,14 @@ import Day from "../Day/Day";
  */
 export interface InternalData {
   title: string;
-  workouts: { day: number; name: string; group: Muscle; id: string }[];
+  workouts: {
+    day: number;
+    name: string;
+    group: Muscle;
+    id: string;
+    reps: number;
+    sets: number;
+  }[];
 }
 
 interface Props {

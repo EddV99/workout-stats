@@ -19,6 +19,8 @@ interface Props {
 function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
   // ------- state --------
   const [newWorkoutName, setNewWorkoutName] = useState<string>("");
+  const [newWorkoutReps, setNewWorkoutReps] = useState(0);
+  const [newWorkoutSets, setNewWorkoutSets] = useState(0);
 
   // ------- handle --------
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -32,6 +34,8 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
         day: day,
         name: newWorkoutName,
         group: Muscle.NONE,
+        sets: newWorkoutSets,
+        reps: newWorkoutReps,
         id: key,
       };
       setStats({ ...stats, workouts: [...stats.workouts, { ...newWorkout }] });
@@ -83,12 +87,44 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
           </Hint>
         </div>
       </div>
-      <input
-        value={newWorkoutName}
-        onChange={(e) => setNewWorkoutName(e.target.value)}
-        onKeyDown={handleKeyDown}
-      ></input>
-      <button onClick={handleAddButton}>Add</button>
+      <div id={Styles.info}>
+        <div id={Styles.infoRow}>
+          Name:
+          <input
+            value={newWorkoutName}
+            onChange={(e) => setNewWorkoutName(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Name"
+          />
+        </div>
+        <div id={Styles.infoRow}>
+          Reps:
+          <input
+            value={newWorkoutReps}
+            onChange={(e) => setNewWorkoutReps(Number(e.target.value))}
+            onKeyDown={handleKeyDown}
+            type="number"
+            min="0"
+            max="10000"
+            step="1"
+            placeholder="# of Reps"
+          />
+        </div>
+        <div id={Styles.infoRow}>
+          Sets:
+          <input
+            value={newWorkoutSets}
+            onChange={(e) => setNewWorkoutSets(Number(e.target.value))}
+            onKeyDown={handleKeyDown}
+            type="number"
+            min="0"
+            max="10000"
+            step="1"
+            placeholder="# of Sets"
+          />
+        </div>
+        <button onClick={handleAddButton}>Add</button>
+      </div>
       <ul className={Styles.list}>
         {stats.workouts
           .filter((i) => i.day === day)

@@ -8,6 +8,10 @@ interface ParsedData {
   dayCount: number;
   // count of total workouts done
   count: number;
+  // count of total reps
+  reps: number;
+  // count of total sets
+  sets: number;
 }
 
 interface Props {
@@ -18,10 +22,10 @@ function Statistics({ data }: Props) {
   const parseStats = (data: InternalData, g: Muscle): ParsedData => {
     const filtered = data.workouts.filter((w) => w.group === g);
     if (filtered.length <= 0) {
-      return { hasData: false, dayCount: 0, count: 0 };
+      return { hasData: false, dayCount: 0, count: 0, reps: 0, sets: 0 };
     }
 
-    const seen: string[] = [];
+    const seen: number[] = [];
     let dayCount = 0;
     filtered.map((w) => {
       if (!seen.includes(w.day)) {
@@ -30,7 +34,20 @@ function Statistics({ data }: Props) {
       }
     });
 
-    return { hasData: true, dayCount: dayCount, count: filtered.length };
+    let reps = 0;
+    let sets = 0;
+    filtered.forEach((i) => {
+      reps += i.reps;
+      sets += i.sets;
+    });
+
+    return {
+      hasData: true,
+      dayCount: dayCount,
+      count: filtered.length,
+      reps,
+      sets,
+    };
   };
 
   const maxDay = data.workouts.reduce((i, c) => {
@@ -51,6 +68,10 @@ function Statistics({ data }: Props) {
                   {maxDay} day(s)
                   <br />
                   You do a total of {stats.count} exercies total
+                  <br />
+                  You do a total of {stats.reps} reps total
+                  <br />
+                  You do a total of {stats.sets} sets total
                 </p>
               </div>
             );

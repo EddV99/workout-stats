@@ -41,6 +41,17 @@
   flex-direction: row;
 }
 
+#info {
+  display: flex;
+  flex-direction: column;
+}
+
+#infoRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px; 
+}
+
 .listItem {
   list-style-type: none;
   padding: 0;
@@ -50,3 +61,4 @@
 .list{
   padding: 0;
 }
+
