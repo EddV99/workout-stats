@@ -4,6 +4,7 @@
   border-radius: 25px;
   width: fit-content;
   padding: 15px;
+  position: relative;
 }
 
 #header {
@@ -59,9 +60,18 @@
 }
 
 .list{
-  padding: 0;
+  padding: 0px 0px 20px 0px;
 }
 
 .bodyIcons {
-  width: 4.0rem;
+  width: 3.0rem;
+}
+
+.uniqueIcons {
+  width: 2.2rem;
+}
+
+#uniqueMuscle {
+  position:absolute;
+  bottom: 0;
 }

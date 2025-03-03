@@ -87,9 +87,21 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
     setOpen((o) => !o);
   };
 
-  const chooseIcon = (group: Muscle) => {
+  const chooseIcon = (group: Muscle, cssModule = Styles.bodyIcons) => {
     if (group === Muscle.NONE) return <RxValueNone size="1.2rem" />;
-    return <img src={muscleToIcon(group)} className={Styles.bodyIcons} />;
+    return <img src={muscleToIcon(group)} className={cssModule} />;
+  };
+
+  const getUniqueMuscles = () => {
+    const unique: Muscle[] = [];
+    return stats.workouts
+      .filter((i) => i.day === day)
+      .map((i) => {
+        if (!unique.includes(i.group)) {
+          unique.push(i.group);
+          return chooseIcon(i.group, Styles.uniqueIcons);
+        }
+      });
   };
 
   return (
@@ -183,6 +195,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
             );
           })}
       </ul>
+      <div id={Styles.uniqueMuscle}>{getUniqueMuscles()}</div>
     </div>
   );
 }
