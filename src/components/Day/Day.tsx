@@ -25,7 +25,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
   const [newWorkoutReps, setNewWorkoutReps] = useState(0);
   const [newWorkoutSets, setNewWorkoutSets] = useState(0);
   const [newWorkoutMuscleGroup, setNewWorkoutMuscleGroup] = useState(
-    Muscle.NONE,
+    Muscle.NONE
   );
 
   // ------- handle --------
@@ -69,6 +69,13 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
     }
   };
 
+  const handleClear = () => {
+    setStats({
+      ...stats,
+      workouts: stats.workouts.filter((item) => item.day !== day),
+    });
+  };
+
   const handleDeleteButton = (id: string) => {
     setStats({
       ...stats,
@@ -98,6 +105,11 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
           <Hint hint="Paste">
             <button onClick={handlePaste}>
               <MdContentPaste size="1.2rem" />
+            </button>
+          </Hint>
+          <Hint hint="Clear">
+            <button onClick={handleClear}>
+              <RxCross2 size="1.2rem" />
             </button>
           </Hint>
         </div>
