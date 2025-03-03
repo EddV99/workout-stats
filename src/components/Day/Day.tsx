@@ -46,7 +46,6 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       };
       setStats({ ...stats, workouts: [...stats.workouts, { ...newWorkout }] });
       setNewWorkoutName("");
-      setNewWorkoutMuscleGroup(Muscle.NONE);
     }
   };
 
