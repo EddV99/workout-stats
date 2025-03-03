@@ -18,3 +18,20 @@
   font-size: 1.0rem;
 }
 
+#icon {
+  color: red;
+}
+
+#editButton {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#editContainer {
+  
+}
+
+#editContainer > input{
+  width: 100px; 
+}

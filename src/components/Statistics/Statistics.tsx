@@ -50,11 +50,11 @@ function Statistics({ data }: Props) {
     };
   };
 
-  const maxDay = data.workouts.reduce((i, c) => {
-    return Number(i.day) > Number(c.day) ? { ...i } : { ...c };
-  }).day;
-
   if (data.workouts.length > 0) {
+    const maxDay = data.workouts.reduce((i, c) => {
+      return Number(i.day) > Number(c.day) ? { ...i } : { ...c };
+    }).day;
+
     return (
       <>
         {MuscleArray.map((muscle, index) => {

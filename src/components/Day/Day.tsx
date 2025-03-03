@@ -161,14 +161,13 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
             return (
               <div id={Styles.container} key={v.id}>
                 <li className={Styles.listItem}>
-                  <Workout id={v.id} stats={stats} setStats={setStats} />
+                  <Workout
+                    id={v.id}
+                    handleDeleteButton={handleDeleteButton}
+                    stats={stats}
+                    setStats={setStats}
+                  />
                 </li>
-                <button
-                  id={Styles.chooseButton}
-                  onClick={() => handleDeleteButton(v.id)}
-                >
-                  <RxCross2 id={Styles.icon} size="1.5rem" />
-                </button>
               </div>
             );
           })}
