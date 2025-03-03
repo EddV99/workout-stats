@@ -25,7 +25,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
   const [newWorkoutReps, setNewWorkoutReps] = useState(0);
   const [newWorkoutSets, setNewWorkoutSets] = useState(0);
   const [newWorkoutMuscleGroup, setNewWorkoutMuscleGroup] = useState(
-    Muscle.NONE
+    Muscle.NONE,
   );
 
   // ------- handle --------
@@ -87,9 +87,13 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
     setOpen((o) => !o);
   };
 
-  const chooseIcon = (group: Muscle, cssModule = Styles.bodyIcons) => {
+  const chooseIcon = (
+    group: Muscle,
+    id: string,
+    cssModule = Styles.bodyIcons,
+  ) => {
     if (group === Muscle.NONE) return <RxValueNone size="1.2rem" />;
-    return <img src={muscleToIcon(group)} className={cssModule} />;
+    return <img key={id} src={muscleToIcon(group)} className={cssModule} />;
   };
 
   const getUniqueMuscles = () => {
@@ -99,7 +103,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       .map((i) => {
         if (!unique.includes(i.group)) {
           unique.push(i.group);
-          return chooseIcon(i.group, Styles.uniqueIcons);
+          return chooseIcon(i.group, i.id, Styles.uniqueIcons);
         }
       });
   };
@@ -165,7 +169,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
         <div id={Styles.infoRow}>
           Muscle Group:
           <button id={Styles.chooseButton} onClick={handleMuscleGroupDropdown}>
-            {chooseIcon(newWorkoutMuscleGroup)}
+            {chooseIcon(newWorkoutMuscleGroup, "muscleGroup")}
             {open ? (
               <MuscleGroupSelection
                 handleChange={(m) => {
