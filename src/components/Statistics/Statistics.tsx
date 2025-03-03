@@ -64,14 +64,14 @@ function Statistics({ data }: Props) {
               <div key={muscle + index}>
                 <h1>{muscle}</h1>
                 <p>
-                  Work this muscle out {stats.dayCount} time(s) in a cycle of{" "}
+                  Work this muscle out <strong>{stats.dayCount}</strong> time(s) in a cycle of{" "}
                   {maxDay} day(s)
                   <br />
-                  You do a total of {stats.count} exercies total
+                  You do a total of <strong>{stats.count} exercies</strong>
                   <br />
-                  You do a total of {stats.reps} reps total
+                  You do a total of <strong>{stats.reps} reps</strong>
                   <br />
-                  You do a total of {stats.sets} sets total
+                  You do a total of <strong>{stats.sets} sets</strong>
                 </p>
               </div>
             );

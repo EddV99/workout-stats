@@ -103,7 +103,11 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       .map((i) => {
         if (!unique.includes(i.group)) {
           unique.push(i.group);
-          return chooseIcon(i.group, i.id, Styles.uniqueIcons);
+          return (
+            <Hint hint={i.group}>
+              {chooseIcon(i.group, i.id, Styles.uniqueIcons)}
+            </Hint>
+          );
         }
       });
   };
@@ -199,7 +203,17 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
             );
           })}
       </ul>
-      <div id={Styles.uniqueMuscle}>{getUniqueMuscles()}</div>
+
+      <div id={Styles.uniqueMuscle}>
+        Muscles Worked On:
+        <div id={Styles.row}>
+          {getUniqueMuscles().length ? (
+            getUniqueMuscles()
+          ) : (
+            <RxValueNone size="1.5rem" />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
