@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { InternalData } from "../../components/Week/Week";
 import Statistics from "../../components/Statistics/Statistics";
+import Heatmap from "../../components/Heatmap/Heatmap";
 
 function DetailsPage() {
   const { id } = useParams();
@@ -12,7 +13,12 @@ function DetailsPage() {
     }
   }
   if (json) {
-    return <Statistics data={json} />;
+    return (
+      <>
+        <Statistics data={json} />
+        <Heatmap />
+      </>
+    );
   } else {
     return <>No data</>;
   }

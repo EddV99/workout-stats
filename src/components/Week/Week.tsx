@@ -66,14 +66,15 @@ function Week({ id, data }: Props) {
         <div id={Styles.week}>
           {[...Array(maxDay)].map((v, i) => {
             return (
-              <Day
-                key={v || i}
-                day={i + 1}
-                copyId={copyId}
-                setCopyId={setCopyId}
-                stats={stats}
-                setStats={setStats}
-              />
+              <div key={v || i}>
+                <Day
+                  day={i + 1}
+                  copyId={copyId}
+                  setCopyId={setCopyId}
+                  stats={stats}
+                  setStats={setStats}
+                />
+              </div>
             );
           })}
           <button id={Styles.addButton} onClick={handleAddButton}>

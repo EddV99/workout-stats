@@ -45,6 +45,7 @@
 #info {
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 
 #infoRow {
@@ -54,9 +55,8 @@
 }
 
 .listItem {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+  padding: 0 0 15px 0;
+  margin: 0 0 0 15px;
 }
 
 .list{
@@ -76,6 +76,7 @@
   flex-direction: column;
   position:absolute;
   bottom: 0;
+  margin: 0 0 10px 0;
 }
 
 #row {

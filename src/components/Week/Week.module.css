@@ -4,6 +4,11 @@
   align-items: center;
   width: fit-content;
   height: auto;
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 6px #00000001,0 15px 32px #0000000f;
+  border-radius: 5px;
 }
 
 #title {

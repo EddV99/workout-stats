@@ -1,12 +1,13 @@
 import Styles from "./Workout.module.css";
 import { RxCross2, RxValueNone } from "react-icons/rx";
 import { Muscle } from "../../muscle/body";
-
 import { useEffect, useRef, useState } from "react";
 import { InternalData } from "../Week/Week";
 import { muscleToIcon } from "../../muscle/icons";
 import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
 import { MdEdit } from "react-icons/md";
+import { FcCheckmark } from "react-icons/fc";
+import { MdDelete } from "react-icons/md";
 
 interface Props {
   id: string;
@@ -86,10 +87,7 @@ function Workout({ id, handleDeleteButton, stats, setStats }: Props) {
 
   const thisWorkout = stats.workouts.filter((i) => i.id === id)[0];
   return editing ? (
-    <div id={Styles.editContainer}>
-      <button id={Styles.editButton} onClick={() => setEditing(false)}>
-        <MdEdit size={15} />
-      </button>
+    <div key={id} id={Styles.editContainer}>
       Name:
       <input
         ref={nameRef}
@@ -110,25 +108,30 @@ function Workout({ id, handleDeleteButton, stats, setStats }: Props) {
         type="number"
         onChange={(e) => handleSetsChange(Number(e.target.value))}
       ></input>
+      Muscle Group:
       <button id={Styles.chooseButton} onClick={handleButton}>
         {chooseIcon(thisWorkout.group)}
         {open ? (
           <MuscleGroupSelection handleChange={handleMuscleGroupChange} />
         ) : null}
       </button>
-      <button
-        id={Styles.chooseButton}
-        onClick={() => handleDeleteButton(thisWorkout.id)}
-      >
-        <RxCross2 id={Styles.icon} size="1.5rem" />
-      </button>
+      <div id={Styles.editTools}>
+        <button onClick={() => handleDeleteButton(thisWorkout.id)}>
+          Delete
+          <MdDelete size="1.5rem" />
+        </button>
+        <button onClick={() => setEditing(false)}>
+          Done
+          <FcCheckmark size={24} />
+        </button>
+      </div>
     </div>
   ) : (
     <div className={Styles.container}>
+      <div id={Styles.name}>{thisWorkout.name}</div>
       <button id={Styles.editButton} onClick={() => setEditing(true)}>
         <MdEdit size={15} />
       </button>
-      <div id={Styles.name}>{thisWorkout.name}</div>
     </div>
   );
 }

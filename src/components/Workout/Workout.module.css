@@ -29,9 +29,14 @@
 }
 
 #editContainer {
-  
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  align-items: center;
 }
 
-#editContainer > input{
-  width: 100px; 
+#editTools * {
+  align-self: stretch;
 }
+
+
