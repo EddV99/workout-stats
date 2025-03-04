@@ -1,5 +1,6 @@
 import { Muscle, MuscleArray } from "../../muscle/body";
 import { InternalData } from "../Week/Week";
+import Styles from "./Statistics.module.css";
 
 interface ParsedData {
   // does this have any relevant data
@@ -17,6 +18,8 @@ interface ParsedData {
 interface Props {
   data: InternalData;
 }
+
+const colors = ["#e87a72", "#7293e8", "#72e88e", "#e89f72", "#b572e8"];
 
 function Statistics({ data }: Props) {
   const parseStats = (data: InternalData, g: Muscle): ParsedData => {
@@ -56,16 +59,20 @@ function Statistics({ data }: Props) {
     }).day;
 
     return (
-      <>
+      <div id={Styles.workouts}>
         {MuscleArray.map((muscle, index) => {
           const stats = parseStats(data, muscle);
           if (stats.hasData) {
             return (
-              <div key={muscle + index}>
+              <div
+                key={muscle + index}
+                id={Styles.stats}
+                style={{ backgroundColor: colors[index % colors.length] }}
+              >
                 <h1>{muscle}</h1>
                 <p>
-                  Work this muscle out <strong>{stats.dayCount}</strong> time(s) in a cycle of{" "}
-                  {maxDay} day(s)
+                  Work this muscle out <strong>{stats.dayCount}</strong> time(s)
+                  in a cycle of {maxDay} day(s)
                   <br />
                   You do a total of <strong>{stats.count} exercies</strong>
                   <br />
@@ -79,7 +86,7 @@ function Statistics({ data }: Props) {
             return null;
           }
         })}
-      </>
+      </div>
     );
   } else {
     return <>No data to parse</>;

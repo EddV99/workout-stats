@@ -5,7 +5,9 @@
   width: fit-content;
   padding: 15px;
   position: relative;
+  height: 100%;
 }
+
 
 #header {
   display: flex;
