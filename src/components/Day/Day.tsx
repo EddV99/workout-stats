@@ -1,5 +1,5 @@
 import Styles from "./Day.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Muscle } from "./../../muscle/body";
 import Workout from "../Workout/Workout";
 import { RxCross2, RxValueNone } from "react-icons/rx";
@@ -19,6 +19,9 @@ interface Props {
 }
 
 function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
+  // -------  ref  --------
+  const nameRef = useRef<HTMLInputElement>(null);
+
   // ------- state --------
   const [open, setOpen] = useState(false);
   const [newWorkoutName, setNewWorkoutName] = useState<string>("");
@@ -46,6 +49,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
       };
       setStats({ ...stats, workouts: [...stats.workouts, { ...newWorkout }] });
       setNewWorkoutName("");
+      nameRef.current?.focus();
     }
   };
 
@@ -139,6 +143,7 @@ function Day({ day, copyId, setCopyId, stats, setStats }: Props) {
           Name:
           <input
             value={newWorkoutName}
+            ref={nameRef}
             onChange={(e) => setNewWorkoutName(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Name"
