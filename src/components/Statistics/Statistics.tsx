@@ -56,31 +56,58 @@ function Statistics({ data }: Props) {
       return Number(i.day) > Number(c.day) ? { ...i } : { ...c };
     }).day;
 
+    let muscleGroupsHit = 0;
+    let totalReps = 0;
+    let totalSets = 0;
+    let totalExercises = 0;
+    let dayCount = 0;
+
+    const workouts = MuscleArray.map((muscle, index) => {
+      const stats = parseStats(data, muscle);
+      if (stats.hasData) {
+        muscleGroupsHit++;
+        totalReps += stats.reps;
+        totalSets += stats.sets;
+        totalExercises += stats.count;
+        dayCount += stats.dayCount;
+
+        return (
+          <div key={muscle + index} id={Styles.stats}>
+            <h1>{muscle}</h1>
+            <p>
+              Work this muscle out <strong>{stats.dayCount}</strong> time(s) in
+              a cycle of {maxDay} day(s)
+              <br />
+              You do a total of <strong>{stats.count} exercise(s)</strong>
+              <br />
+              You do a total of <strong>{stats.reps} reps</strong>
+              <br />
+              You do a total of <strong>{stats.sets} sets</strong>
+            </p>
+          </div>
+        );
+      }
+    });
+
     return (
-      <div id={Styles.workouts}>
-        {MuscleArray.map((muscle, index) => {
-          const stats = parseStats(data, muscle);
-          if (stats.hasData) {
-            return (
-              <div key={muscle + index} id={Styles.stats}>
-                <h1>{muscle}</h1>
-                <p>
-                  Work this muscle out <strong>{stats.dayCount}</strong> time(s)
-                  in a cycle of {maxDay} day(s)
-                  <br />
-                  You do a total of <strong>{stats.count} exercies</strong>
-                  <br />
-                  You do a total of <strong>{stats.reps} reps</strong>
-                  <br />
-                  You do a total of <strong>{stats.sets} sets</strong>
-                </p>
-              </div>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </div>
+      <>
+        <div id={Styles.workouts}>{workouts}</div>
+        <div id={Styles.total}>
+          In this workout cycle of {maxDay} day(s):
+          <br />
+          ({muscleGroupsHit} muscles hit) / ({MuscleArray.length} total
+          muscle groups)
+          <br />
+          {totalReps} total reps
+          <br />
+          {totalSets} total sets
+          <br />
+          {totalExercises} total exercises
+          <br />
+          Muscles worked out an average{" "}
+          {(dayCount / muscleGroupsHit).toFixed(1)} time(s)
+        </div>
+      </>
     );
   } else {
     return <>No data to parse</>;
