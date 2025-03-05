@@ -19,8 +19,6 @@ interface Props {
   data: InternalData;
 }
 
-const colors = ["#e87a72", "#7293e8", "#72e88e", "#e89f72", "#b572e8"];
-
 function Statistics({ data }: Props) {
   const parseStats = (data: InternalData, g: Muscle): ParsedData => {
     const filtered = data.workouts.filter((w) => w.group === g);
@@ -64,11 +62,7 @@ function Statistics({ data }: Props) {
           const stats = parseStats(data, muscle);
           if (stats.hasData) {
             return (
-              <div
-                key={muscle + index}
-                id={Styles.stats}
-                style={{ backgroundColor: colors[index % colors.length] }}
-              >
+              <div key={muscle + index} id={Styles.stats}>
                 <h1>{muscle}</h1>
                 <p>
                   Work this muscle out <strong>{stats.dayCount}</strong> time(s)

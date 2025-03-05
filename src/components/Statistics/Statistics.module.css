@@ -1,13 +1,21 @@
 #workouts {
   display: flex;
   flex-wrap: wrap;  
+  justify-content: center;
+}
+
+#stats > h1{  
+  padding-bottom: 10px;
+  margin: 0;
+  border-bottom: solid 1px #bbbbbb;
 }
 
 #stats {  
-  box-shadow: 0 6px #00000008, 0 15px 32px #0000000f;
-  border-radius: 5px;
+  border: solid 2px;
+  border-radius: 6px;
   padding: 20px;
   margin: 10px;
   width: fit-content;
 }
+
 

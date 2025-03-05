@@ -1,0 +1,17 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 6px 6px #00000008, 0 15px 32px #0000000f;
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: fit-content;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+#title {
+  font-size: 30px;
+  margin: 10px;
+}
