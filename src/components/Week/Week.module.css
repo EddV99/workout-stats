@@ -12,10 +12,9 @@
 }
 
 #title {
-  margin-bottom: 10px;
-  border: 0;
-  font-size: 2em;
-  outline: 0;
+  font-size: 2rem;
+  padding: 20px;
+  font-weight: bold;
 }
 
 #week {

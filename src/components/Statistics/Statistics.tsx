@@ -93,7 +93,8 @@ function Statistics({ data }: Props) {
       <>
         <div id={Styles.workouts}>{workouts}</div>
         <div id={Styles.total}>
-          In this workout cycle of {maxDay} day(s):
+          <u>In this workout cycle of {maxDay} day(s):</u>
+          <br />
           <br />
           ({muscleGroupsHit} muscles hit) / ({MuscleArray.length} total
           muscle groups)

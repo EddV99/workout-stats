@@ -19,8 +19,12 @@
 }
 
 #total {
-  border-top: dotted 1px #bbbbbb;
+  box-sizing: border-box;
   width: 100%;
+  border-top: dotted 1px #888888;
   margin-top: 30px;
+  padding: 30px;
+  text-align: center;
+  font-size: 1.2rem;
 }
 

@@ -33,10 +33,10 @@ function EditableText({ text, onChange }: Props) {
         </>
       ) : (
         <>
+          {text}
           <button id={Styles.editButton} onClick={() => setEditing(true)}>
             <MdEdit size={15} />
           </button>
-          {text}
         </>
       )}
     </div>
