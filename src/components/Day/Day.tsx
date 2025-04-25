@@ -1,6 +1,6 @@
 import Styles from "./Day.module.css";
 import { useRef, useState } from "react";
-import { Muscle } from "./../../muscle/body";
+import { Muscle } from "./../../data/body";
 import Workout from "../Workout/Workout";
 import { RxCross2, RxValueNone } from "react-icons/rx";
 import { FaRegCopy } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { MdContentPaste } from "react-icons/md";
 import { InternalData } from "../Week/Week";
 import Hint from "../Hint/Hint";
 import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
-import { muscleToIcon } from "../../muscle/icons";
+import { muscleToIcon } from "../../data/icons";
 
 interface Props {
   day: number;

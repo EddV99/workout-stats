@@ -1,4 +1,4 @@
-import { Muscle, MuscleArray } from "../../muscle/body";
+import { Muscle, MuscleArray } from "../../data/body";
 import { InternalData } from "../Week/Week";
 import Styles from "./Statistics.module.css";
 

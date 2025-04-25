@@ -1,7 +1,7 @@
 import Styles from "./MuscleGroupSelection.module.css";
 import Hint from "../Hint/Hint";
-import icons from "../../muscle/icons";
-import { Muscle } from "../../muscle/body";
+import icons from "../../data/icons";
+import { Muscle } from "../../data/body";
 
 interface Props {
   handleChange: (group: Muscle) => void;

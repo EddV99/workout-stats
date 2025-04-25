@@ -1,7 +1,7 @@
 import Styles from "./Week.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { Muscle } from "../../muscle/body";
+import { Muscle } from "../../data/body";
 import { IoMdAdd } from "react-icons/io";
 import EditableText from "../EditableText/EditableText";
 import Day from "../Day/Day";
@@ -31,8 +31,8 @@ function Week({ id, data }: Props) {
   const [maxDay, setMaxDays] = useState(
     data && data.workouts.length > 0
       ? data.workouts.reduce((max, c) => {
-          return c.day > max.day ? c : max;
-        }).day
+        return c.day > max.day ? c : max;
+      }).day
       : 1,
   );
   const [stats, setStats] = useState<InternalData>(

@@ -1,9 +1,9 @@
 import Styles from "./Workout.module.css";
-import {  RxValueNone } from "react-icons/rx";
-import { Muscle } from "../../muscle/body";
-import {  useRef, useState } from "react";
+import { RxValueNone } from "react-icons/rx";
+import { Muscle } from "../../data/body";
+import { useRef, useState } from "react";
 import { InternalData } from "../Week/Week";
-import { muscleToIcon } from "../../muscle/icons";
+import { muscleToIcon } from "../../data/icons";
 import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
 import { MdEdit } from "react-icons/md";
 import { FcCheckmark } from "react-icons/fc";
