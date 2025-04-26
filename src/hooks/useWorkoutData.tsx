@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { DayData, defaultData, InternalData, WorkoutData } from "../data/data";
+import { defaultData, InternalData } from "../data/data";
 
 
 export default function useWorkoutData(id: string) {
-  const [data, setData] = useState<InternalData | null>(null);
+  const [data, setData] = useState<InternalData>(defaultData());
 
   useEffect(() => {
     try {
@@ -25,9 +25,7 @@ export default function useWorkoutData(id: string) {
   }, [data]);
 
   const setTitle = (newTitle: string) => {
-    if (!data) return;
-
-    setData({ title: newTitle, days: data.days ? [...data.days] : [] });
+    setData({ title: newTitle, days: [...data.days] });
   };
 
 
