@@ -1,4 +1,4 @@
-import useWorkoutData from "../../hooks/useWorkoutData";
+import { useWorkoutData } from "../../context/WorkoutDataContext";
 import EditText from "../EditText/EditText";
 import Workout from "../Workout/Workout";
 
@@ -8,7 +8,7 @@ interface Props {
 
 function WorkoutSchedule({ dataId }: Props) {
 
-  const { title, setTitle } = useWorkoutData(dataId);
+  const { title, setTitle } = useWorkoutData();
 
   return (
     <div>

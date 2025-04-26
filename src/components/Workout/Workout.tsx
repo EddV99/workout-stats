@@ -1,7 +1,8 @@
 import { useState } from "react";
-import useWorkoutData from "../../hooks/useWorkoutData";
 import { makeExercise } from "../../data/data";
 import { Muscle } from "../../data/body";
+import Exercise from "../Exercise/Exercise";
+import { useWorkoutData } from "../../context/WorkoutDataContext";
 
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 };
 
 function Workout({ index, dataId }: Props) {
-  const { workouts, addExercise } = useWorkoutData(dataId);
+  const { workouts, addExercise } = useWorkoutData();
 
   const [name, setName] = useState("");
   const [sets, setSets] = useState(0);
@@ -21,10 +22,16 @@ function Workout({ index, dataId }: Props) {
     addExercise(index, newExercise)
   };
 
-  let currentWorkouts = workouts.filter((w) => w.index === index);
+  let currentWorkouts = workouts.filter((w) => w.index === index)[0];
+
   return (
     <div>
-      {currentWorkouts.length === 0 ? <h2>No Exercises</h2> : <h2>Exercises</h2>}
+      {currentWorkouts ?
+        currentWorkouts.exercises.map((e) => {
+          return <Exercise id={e.id} dataId={dataId} index={index} />
+        })
+        : ""
+      }
       <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name"></input>
       <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number"></input>
       <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number"></input>

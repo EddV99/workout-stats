@@ -1,8 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import { ExerciseData, makeWorkout, WorkoutData } from "../data/data";
 
 
-export default function useWorkoutData(id: string) {
+interface WorkoutContextType {
+  title: string
+  setTitle: React.Dispatch<React.SetStateAction<string>>
+  workouts: WorkoutData[]
+  setWorkouts: React.Dispatch<React.SetStateAction<WorkoutData[]>>
+  addExercise: (index: number, exercise: ExerciseData) => void
+}
+
+export const WorkoutDataContext = createContext<WorkoutContextType | undefined>(undefined);
+
+interface Props {
+  id: string
+  children: React.ReactNode
+}
+
+export function WorkoutDataProvider({ id, children }: Props) {
+
   const [title, setTitle] = useState<string>(() => {
     try {
       const stored = localStorage.getItem(id);
@@ -36,7 +52,7 @@ export default function useWorkoutData(id: string) {
 
   useEffect(() => {
     localStorage.setItem(id, JSON.stringify({ title: title, workouts: [...workouts] }));
-  }, [title, workouts]);
+  }, [id, title, workouts]);
 
   const addExercise = (index: number, exercise: ExerciseData) => {
     let hasIndex = workouts.filter((w) => w.index === index).length !== 0;
@@ -48,5 +64,17 @@ export default function useWorkoutData(id: string) {
     }
   }
 
-  return { title, setTitle, workouts, setWorkouts, addExercise };
+  return (
+    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, addExercise }} >
+      {children}
+    </WorkoutDataContext.Provider>
+  );
 }
+
+export const useWorkoutData = () => {
+  const context = useContext(WorkoutDataContext);
+  if (!context) {
+    throw new Error("Context must be used within a WorkoutDataProvider");
+  }
+  return context;
+};
