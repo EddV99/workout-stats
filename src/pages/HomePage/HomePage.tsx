@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <>
       <div id={Styles.content}>
-        <WorkoutSchedule dataId="1" />
+        <WorkoutSchedule />
       </div>
     </>
   );

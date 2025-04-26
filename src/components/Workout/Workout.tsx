@@ -7,10 +7,9 @@ import { useWorkoutData } from "../../context/WorkoutDataContext";
 
 interface Props {
   index: number
-  dataId: string;
 };
 
-function Workout({ index, dataId }: Props) {
+function Workout({ index }: Props) {
   const { workouts, addExercise } = useWorkoutData();
 
   const [name, setName] = useState("");
@@ -26,11 +25,12 @@ function Workout({ index, dataId }: Props) {
 
   return (
     <div>
-      {currentWorkouts ?
-        currentWorkouts.exercises.map((e) => {
-          return <Exercise id={e.id} dataId={dataId} index={index} />
-        })
-        : ""
+      {
+        currentWorkouts ?
+          currentWorkouts.exercises.map((e) => {
+            return <Exercise id={e.id} index={index} />
+          })
+          : ""
       }
       <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name"></input>
       <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number"></input>

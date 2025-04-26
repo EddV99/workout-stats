@@ -7,7 +7,9 @@ interface WorkoutContextType {
   setTitle: React.Dispatch<React.SetStateAction<string>>
   workouts: WorkoutData[]
   setWorkouts: React.Dispatch<React.SetStateAction<WorkoutData[]>>
+  getExercise: (id: string, index: number) => ExerciseData | undefined
   addExercise: (index: number, exercise: ExerciseData) => void
+  updateExercise: (index: number, exercise: ExerciseData) => boolean
 }
 
 export const WorkoutDataContext = createContext<WorkoutContextType | undefined>(undefined);
@@ -54,6 +56,7 @@ export function WorkoutDataProvider({ id, children }: Props) {
     localStorage.setItem(id, JSON.stringify({ title: title, workouts: [...workouts] }));
   }, [id, title, workouts]);
 
+
   const addExercise = (index: number, exercise: ExerciseData) => {
     let hasIndex = workouts.filter((w) => w.index === index).length !== 0;
     if (hasIndex)
@@ -64,8 +67,41 @@ export function WorkoutDataProvider({ id, children }: Props) {
     }
   }
 
+  const getExercise = (id: string, index: number) => {
+    const workoutsForIndex = workouts.filter((w) => w.index === index);
+    if (workoutsForIndex.length === 0)
+      return undefined;
+
+    const workout = workoutsForIndex[0];
+
+    const exercise = workout.exercises.filter((e) => e.id === id);
+    if (exercise.length === 0)
+      return undefined;
+
+    return exercise[0];
+  }
+
+  const updateExercise = (index: number, exercise: ExerciseData) => {
+    let searchWorkout = workouts.filter((w) => w.index === index);
+    if (searchWorkout.length === 0)
+      return false;
+
+    let thisWorkout = searchWorkout[0];
+
+    let exerciseIndex = thisWorkout.exercises.findIndex((e) => e.id === exercise.id);
+    if (exerciseIndex === -1)
+      return false;
+
+    let newExercises = thisWorkout.exercises.filter((e) => e.id !== exercise.id);
+    newExercises.splice(exerciseIndex, 0, exercise);
+    thisWorkout.exercises = newExercises;
+
+    setWorkouts((w) => w.map((wi) => wi.index !== index ? { ...wi } : { ...thisWorkout }));
+    return true;
+  }
+
   return (
-    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, addExercise }} >
+    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, getExercise, addExercise, updateExercise }} >
       {children}
     </WorkoutDataContext.Provider>
   );
