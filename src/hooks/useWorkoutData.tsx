@@ -1,34 +1,43 @@
 import { useEffect, useState } from "react";
-import { defaultData, InternalData } from "../data/data";
+import { WorkoutData } from "../data/data";
 
 
 export default function useWorkoutData(id: string) {
-  const [data, setData] = useState<InternalData>(defaultData());
-
-  useEffect(() => {
+  const [title, setTitle] = useState<string>(() => {
     try {
       const stored = localStorage.getItem(id);
       if (stored) {
-        setData({ ...JSON.parse(stored) });
+        let parsedData = JSON.parse(stored);
+        return parsedData.title;
       } else {
-        localStorage.setItem(id, JSON.stringify(defaultData()));
-        setData({ ...defaultData() });
+        return "Workouts";
       }
     } catch {
-      localStorage.setItem(id, JSON.stringify(defaultData()));
-      setData({ ...defaultData() });
+      return "Workouts";
     }
-  }, []);
+  });
+
+  const [workouts, setWorkouts] = useState<WorkoutData[]>(
+    () => {
+      try {
+        const stored = localStorage.getItem(id);
+        if (stored) {
+          let parsedData = JSON.parse(stored);
+          return parsedData.workouts;
+        } else {
+          return [];
+        }
+      } catch {
+        return [];
+      }
+
+    }
+  );
 
   useEffect(() => {
-    localStorage.setItem(id, JSON.stringify(data));
-  }, [data]);
-
-  const setTitle = (newTitle: string) => {
-    setData({ title: newTitle, days: [...data.days] });
-  };
+    localStorage.setItem(id, JSON.stringify({ title: title, workouts: [...workouts] }));
+  }, [title, workouts]);
 
 
-
-  return { data, setData, setTitle };
+  return { title, setTitle, workouts, setWorkouts };
 }

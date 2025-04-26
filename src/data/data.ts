@@ -2,16 +2,16 @@ import { Muscle } from "./body";
 
 export interface InternalData {
   title: string;
-  days: DayData[];
-}
-
-export interface DayData {
-  id: string;
-  index: number;
   workouts: WorkoutData[];
 }
 
 export interface WorkoutData {
+  id: string;
+  index: number;
+  exercises: ExerciseData[];
+}
+
+export interface ExerciseData {
   id: string;
   name: string;
   group: Muscle;
@@ -19,14 +19,10 @@ export interface WorkoutData {
   sets: number;
 }
 
-export function defaultData(): InternalData {
-  return { title: "Workout", days: [] };
+export function makeDay(id: string, index: number, workouts: ExerciseData[]): WorkoutData {
+  return { id, index, exercises: workouts };
 }
 
-export function makeDay(id: string, index: number, workouts: WorkoutData[]): DayData {
-  return { id, index, workouts };
-}
-
-export function makeWorkout(id: string, name: string, group: Muscle, reps: number, sets: number): WorkoutData {
+export function makeWorkout(id: string, name: string, group: Muscle, reps: number, sets: number): ExerciseData {
   return { id, name, group, reps, sets };
 }

@@ -1,17 +1,19 @@
-import { useState } from "react";
 import useWorkoutData from "../../hooks/useWorkoutData";
 import EditText from "../EditText/EditText";
 
 interface Props {
   dataId: string;
 };
+
 function WorkoutSchedule({ dataId }: Props) {
 
-  const { data, setTitle } = useWorkoutData(dataId);
+  const { title, setTitle } = useWorkoutData(dataId);
 
-  return <h1>
-    <EditText text={data.title} setText={setTitle} />
-  </h1>;
+  return (
+    <div>
+      <h1><EditText text={title} setText={setTitle} /></h1>
+    </div>
+  );
 }
 
 export default WorkoutSchedule;
