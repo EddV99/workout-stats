@@ -19,10 +19,10 @@ export interface ExerciseData {
   sets: number;
 }
 
-export function makeDay(id: string, index: number, workouts: ExerciseData[]): WorkoutData {
-  return { id, index, exercises: workouts };
+export function makeWorkout(id: string, index: number, exercises: ExerciseData[]): WorkoutData {
+  return { id, index, exercises };
 }
 
-export function makeWorkout(id: string, name: string, group: Muscle, reps: number, sets: number): ExerciseData {
+export function makeExercise(id: string, name: string, group: Muscle, reps: number, sets: number): ExerciseData {
   return { id, name, group, reps, sets };
 }

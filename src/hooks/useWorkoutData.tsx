@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { WorkoutData } from "../data/data";
+import { ExerciseData, makeWorkout, WorkoutData } from "../data/data";
 
 
 export default function useWorkoutData(id: string) {
@@ -38,6 +38,15 @@ export default function useWorkoutData(id: string) {
     localStorage.setItem(id, JSON.stringify({ title: title, workouts: [...workouts] }));
   }, [title, workouts]);
 
+  const addExercise = (index: number, exercise: ExerciseData) => {
+    let hasIndex = workouts.filter((w) => w.index === index).length !== 0;
+    if (hasIndex)
+      setWorkouts((w) => w.map((m) => m.index === index ? { ...m, exercises: [...m.exercises, exercise] } : m));
+    else {
+      let newWorkout = makeWorkout(`${index}${Date.now().toString()}`, index, [exercise]);
+      setWorkouts((w) => [...w, newWorkout]);
+    }
+  }
 
-  return { title, setTitle, workouts, setWorkouts };
+  return { title, setTitle, workouts, setWorkouts, addExercise };
 }
