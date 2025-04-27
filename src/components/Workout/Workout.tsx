@@ -38,6 +38,7 @@ function Workout({ index }: Props) {
 
   return (
     <div>
+      <div>Day {index}</div>
       {
         currentWorkout.exercises.length > 0 ?
           currentWorkout.exercises.map((e) => {
