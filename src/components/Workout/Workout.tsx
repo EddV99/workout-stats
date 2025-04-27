@@ -28,7 +28,7 @@ function Workout({ index }: Props) {
       {
         currentWorkouts ?
           currentWorkouts.exercises.map((e) => {
-            return <Exercise id={e.id} index={index} />
+            return <Exercise id={e.id} index={index} key={e.id} />
           })
           : ""
       }
