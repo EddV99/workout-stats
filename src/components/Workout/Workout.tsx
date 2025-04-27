@@ -26,12 +26,12 @@ function Workout({ index }: Props) {
     }
   };
 
-  let currentWorkout = getWorkout(index);
+  let currentWorkout = getWorkout({ index });
   useEffect(() => {
     if (!currentWorkout) {
-      addWorkout(index);
+      addWorkout({ index });
     }
-    currentWorkout = getWorkout(index);
+    currentWorkout = getWorkout({ index });
   }, [currentWorkout, index])
 
   if (!currentWorkout) return <div>Error: Finding Workout</div>;

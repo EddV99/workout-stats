@@ -7,9 +7,10 @@ interface WorkoutContextType {
   setTitle: React.Dispatch<React.SetStateAction<string>>
   workouts: WorkoutData[]
   setWorkouts: React.Dispatch<React.SetStateAction<WorkoutData[]>>
-  getWorkout: (index: number) => WorkoutData | undefined
-  addWorkout: (index: number) => void
-  removeWorkout: (index: number) => void
+  getWorkout: ({ }: { index?: number, id?: string }) => WorkoutData | undefined
+  addWorkout: ({ }: { index: number, workoutData?: WorkoutData }) => void
+  removeWorkout: ({ }: { index?: number, id?: string }) => void
+  updateWorkout: ({ }: { index?: number, id?: string, workoutData: WorkoutData }) => void
   getExercise: (id: string, index: number) => ExerciseData | undefined
   addExercise: (index: number, exercise: ExerciseData) => void
   updateExercise: (index: number, exercise: ExerciseData) => boolean
@@ -60,19 +61,36 @@ export function WorkoutDataProvider({ id, children }: Props) {
   }, [id, title, workouts]);
 
 
-  const getWorkout = (index: number) => {
-    return workouts.filter((w) => w.index === index)[0];
+  const getWorkout = ({ index, id }: { index?: number, id?: string }) => {
+    if (id !== undefined) {
+      return workouts.filter((w) => w.id === id)[0];
+    } else if (index !== undefined) {
+      return workouts.filter((w) => w.index === index)[0];
+    }
   }
 
-  const addWorkout = (index: number) => {
+  const addWorkout = ({ index, workoutData }: { index: number, workoutData?: WorkoutData }) => {
     let newWorkout = makeWorkout(`${index}${Date.now().toString()}`, index, []);
-    setWorkouts((w) => [...w.filter(wi => wi.index !== index), newWorkout]);
+    let w = workouts.filter(wi => wi.index !== index);
+    w.splice(index - 1, 0, workoutData ? workoutData : newWorkout);
+    setWorkouts([...w]);
   }
 
-  const removeWorkout = (index: number) => {
-    setWorkouts((w) => [...w.filter(wi => wi.index !== index)]);
+  const removeWorkout = ({ index, id }: { index?: number, id?: string }) => {
+    if (id !== undefined) {
+      setWorkouts((w) => [...w.filter(wi => wi.id !== id)]);
+    } else if (index !== undefined) {
+      setWorkouts((w) => [...w.filter(wi => wi.index !== index)]);
+    }
   }
 
+  const updateWorkout = ({ index, id, workoutData }: { index?: number, id?: string, workoutData: WorkoutData }) => {
+    if (index) {
+      setWorkouts((w) => [...w.filter(wi => wi.index !== index), workoutData]);
+    } else if (id) {
+      setWorkouts((w) => [...w.filter(wi => wi.id !== id), workoutData]);
+    }
+  }
   const addExercise = (index: number, exercise: ExerciseData) => {
     let hasIndex = workouts.filter((w) => w.index === index).length !== 0;
     if (hasIndex)
@@ -117,7 +135,19 @@ export function WorkoutDataProvider({ id, children }: Props) {
   }
 
   return (
-    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, addWorkout, getWorkout, removeWorkout, getExercise, addExercise, updateExercise }} >
+    <WorkoutDataContext.Provider value={{
+      title,
+      setTitle,
+      workouts,
+      setWorkouts,
+      addWorkout,
+      updateWorkout,
+      getWorkout,
+      removeWorkout,
+      getExercise,
+      addExercise,
+      updateExercise
+    }} >
       {children}
     </WorkoutDataContext.Provider>
   );
