@@ -65,7 +65,7 @@ export function WorkoutDataProvider({ id, children }: Props) {
 
   const addWorkout = (index: number) => {
     let newWorkout = makeWorkout(`${index}${Date.now().toString()}`, index, []);
-    setWorkouts((w) => [...w, newWorkout]);
+    setWorkouts((w) => [...w.filter(wi => wi.index !== index), newWorkout]);
   }
 
   const addExercise = (index: number, exercise: ExerciseData) => {

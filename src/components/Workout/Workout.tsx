@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { makeExercise } from "../../data/data";
 import { Muscle } from "../../data/body";
 import Exercise from "../Exercise/Exercise";
@@ -27,11 +27,14 @@ function Workout({ index }: Props) {
   };
 
   let currentWorkout = getWorkout(index);
-  if (!currentWorkout) {
-    addWorkout(index);
+  useEffect(() => {
+    if (!currentWorkout) {
+      addWorkout(index);
+    }
     currentWorkout = getWorkout(index);
-    if (!currentWorkout) return <>Error: Finding Workout</>;
-  }
+  }, [currentWorkout, index])
+
+  if (!currentWorkout) return <div>Error: Finding Workout</div>;
 
   return (
     <div>
