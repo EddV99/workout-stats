@@ -7,6 +7,8 @@ interface WorkoutContextType {
   setTitle: React.Dispatch<React.SetStateAction<string>>
   workouts: WorkoutData[]
   setWorkouts: React.Dispatch<React.SetStateAction<WorkoutData[]>>
+  getWorkout: (index: number) => WorkoutData | undefined
+  addWorkout: (index: number) => void
   getExercise: (id: string, index: number) => ExerciseData | undefined
   addExercise: (index: number, exercise: ExerciseData) => void
   updateExercise: (index: number, exercise: ExerciseData) => boolean
@@ -57,6 +59,15 @@ export function WorkoutDataProvider({ id, children }: Props) {
   }, [id, title, workouts]);
 
 
+  const getWorkout = (index: number) => {
+    return workouts.filter((w) => w.index === index)[0];
+  }
+
+  const addWorkout = (index: number) => {
+    let newWorkout = makeWorkout(`${index}${Date.now().toString()}`, index, []);
+    setWorkouts((w) => [...w, newWorkout]);
+  }
+
   const addExercise = (index: number, exercise: ExerciseData) => {
     let hasIndex = workouts.filter((w) => w.index === index).length !== 0;
     if (hasIndex)
@@ -101,7 +112,7 @@ export function WorkoutDataProvider({ id, children }: Props) {
   }
 
   return (
-    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, getExercise, addExercise, updateExercise }} >
+    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, addWorkout, getWorkout, getExercise, addExercise, updateExercise }} >
       {children}
     </WorkoutDataContext.Provider>
   );

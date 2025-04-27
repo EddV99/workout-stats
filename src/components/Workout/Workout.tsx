@@ -10,32 +10,42 @@ interface Props {
 };
 
 function Workout({ index }: Props) {
-  const { workouts, addExercise } = useWorkoutData();
+  const { addWorkout, getWorkout, addExercise } = useWorkoutData();
 
   const [name, setName] = useState("");
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
 
   const handleClick = () => {
-    const newExercise = makeExercise(name + Date.now().toString(), name, Muscle.NONE, reps, sets);
-    addExercise(index, newExercise)
+    if (name.trim().length > 0) {
+      const newExercise = makeExercise(name + Date.now().toString(), name, Muscle.NONE, reps, sets);
+      addExercise(index, newExercise)
+      setName("");
+      setSets(0);
+      setReps(0);
+    }
   };
 
-  let currentWorkouts = workouts.filter((w) => w.index === index)[0];
+  let currentWorkout = getWorkout(index);
+  if (!currentWorkout) {
+    addWorkout(index);
+    currentWorkout = getWorkout(index);
+    if (!currentWorkout) return <>Error: Finding Workout</>;
+  }
 
   return (
     <div>
       {
-        currentWorkouts ?
-          currentWorkouts.exercises.map((e) => {
+        currentWorkout.exercises.length > 0 ?
+          currentWorkout.exercises.map((e) => {
             return <Exercise id={e.id} index={index} key={e.id} />
           })
-          : ""
+          : <div>No exercises added yet</div>
       }
-      <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name"></input>
-      <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number"></input>
-      <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number"></input>
-      <button onClick={handleClick}>Done</button>
+      <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+      <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number" />
+      <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number" />
+      <button onClick={handleClick}>Add</button>
     </div>
   );
 }
