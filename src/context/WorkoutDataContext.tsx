@@ -9,6 +9,7 @@ interface WorkoutContextType {
   setWorkouts: React.Dispatch<React.SetStateAction<WorkoutData[]>>
   getWorkout: (index: number) => WorkoutData | undefined
   addWorkout: (index: number) => void
+  removeWorkout: (index: number) => void
   getExercise: (id: string, index: number) => ExerciseData | undefined
   addExercise: (index: number, exercise: ExerciseData) => void
   updateExercise: (index: number, exercise: ExerciseData) => boolean
@@ -68,6 +69,10 @@ export function WorkoutDataProvider({ id, children }: Props) {
     setWorkouts((w) => [...w.filter(wi => wi.index !== index), newWorkout]);
   }
 
+  const removeWorkout = (index: number) => {
+    setWorkouts((w) => [...w.filter(wi => wi.index !== index)]);
+  }
+
   const addExercise = (index: number, exercise: ExerciseData) => {
     let hasIndex = workouts.filter((w) => w.index === index).length !== 0;
     if (hasIndex)
@@ -112,7 +117,7 @@ export function WorkoutDataProvider({ id, children }: Props) {
   }
 
   return (
-    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, addWorkout, getWorkout, getExercise, addExercise, updateExercise }} >
+    <WorkoutDataContext.Provider value={{ title, setTitle, workouts, setWorkouts, addWorkout, getWorkout, removeWorkout, getExercise, addExercise, updateExercise }} >
       {children}
     </WorkoutDataContext.Provider>
   );
