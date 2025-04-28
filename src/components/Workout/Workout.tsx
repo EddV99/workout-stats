@@ -51,7 +51,7 @@ function Workout({ index }: Props) {
           currentWorkout.exercises.length > 0 ?
             currentWorkout.exercises.map((e) => {
               return (
-                <div key={e.id}>
+                <div key={e.id} id={Styles.exerciseContainer}>
                   <Exercise id={e.id} index={index} />
                   <button onClick={() => handleRemoveExercise(currentWorkout!.index, e.id)}>D</button>
                 </div>
@@ -60,19 +60,23 @@ function Workout({ index }: Props) {
             : <div>No exercises added yet</div>
         }
       </div>
-      <div id={Styles.name} >
-        Name:
-        <input ref={nameInputRef} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+      <div id={Styles.inputContainer}>
+        <div>
+          <div id={Styles.name} >
+            Name:
+            <input ref={nameInputRef} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+          </div>
+          <div id={Styles.sets} >
+            Sets:
+            <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number" />
+          </div>
+          <div id={Styles.reps}>
+            Reps:
+            <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number" />
+          </div>
+        </div>
+        <button onClick={handleClick}>Add</button>
       </div>
-      <div id={Styles.sets} >
-        Sets:
-        <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number" />
-      </div>
-      <div id={Styles.reps}>
-        Reps:
-        <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number" />
-      </div>
-      <button onClick={handleClick}>Add</button>
     </div>
   );
 }
