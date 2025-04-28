@@ -1,0 +1,22 @@
+#content {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin: 100px;
+}
+
+#phrase {
+  font-weight: bold;
+  font-size: 2.0rem;
+}
+
+#goBack {
+  margin: 30px;
+  text-decoration: none;
+  color: black;
+  background-color: #8b7ec8;
+  padding: 1.2rem;
+  border-radius: 1.3rem;
+  border: 2px solid #453864;
+  cursor: hover;
+}
