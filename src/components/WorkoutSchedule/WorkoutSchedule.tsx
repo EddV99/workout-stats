@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useWorkoutData } from "../../context/WorkoutDataContext";
 import EditText from "../EditText/EditText";
 import Workout from "../Workout/Workout";
+import { Link } from "react-router";
 
 
 function WorkoutSchedule() {
 
-  const { title, setTitle, workouts, addWorkout, removeWorkout, getWorkout, updateWorkout } = useWorkoutData();
+  const { workoutId, title, setTitle, workouts, addWorkout, removeWorkout, getWorkout, updateWorkout } = useWorkoutData();
   const [copyId, setCopyId] = useState("");
 
   const handleButton = () => {
@@ -33,7 +34,10 @@ function WorkoutSchedule() {
 
   return (
     <div id={Styles.container} >
-      <h1><EditText text={title} setText={setTitle} /></h1>
+      <div id={Styles.top}>
+        <div id={Styles.title} ><EditText text={title} setText={setTitle} /></div>
+        <Link to={`/details/${workoutId}`} id={Styles.viewDetails} >View Details</Link>
+      </div>
       <div id={Styles.workouts} >
         {workouts.map((w) => {
           return <div key={w.id} >
@@ -45,7 +49,7 @@ function WorkoutSchedule() {
         })}
       </div>
       <button onClick={handleButton}>Add a day</button>
-    </div>
+    </div >
   );
 }
 
