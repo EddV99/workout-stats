@@ -3,6 +3,7 @@ import { ExerciseData, makeWorkout, WorkoutData } from "../data/data";
 
 
 interface WorkoutContextType {
+  workoutId: string
   title: string
   setTitle: React.Dispatch<React.SetStateAction<string>>
   workouts: WorkoutData[]
@@ -154,6 +155,7 @@ export function WorkoutDataProvider({ id, children }: Props) {
 
   return (
     <WorkoutDataContext.Provider value={{
+      workoutId: id,
       title,
       setTitle,
       workouts,
