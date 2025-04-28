@@ -4,9 +4,7 @@ import Router from "./router/Router";
 
 function App() {
   return (
-    <WorkoutDataProvider id="1">
-      <Router />
-    </WorkoutDataProvider>
+    <Router />
   );
 }
 
