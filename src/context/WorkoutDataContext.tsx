@@ -77,18 +77,36 @@ export function WorkoutDataProvider({ id, children }: Props) {
   }
 
   const removeWorkout = ({ index, id }: { index?: number, id?: string }) => {
-    if (id !== undefined) {
-      setWorkouts((w) => [...w.filter(wi => wi.id !== id)]);
-    } else if (index !== undefined) {
-      setWorkouts((w) => [...w.filter(wi => wi.index !== index)]);
+    if (id) {
+      let i = workouts.filter(wi => wi.id === id)[0].index;
+      let w = workouts.filter(wi => wi.id !== id).sort((a, b) => a.index - b.index);
+      w = w.map((wi) => {
+        if (wi.index > i)
+          wi.index = wi.index - 1;
+        return { ...wi };
+      });
+      setWorkouts([...w]);
+    } else if (index) {
+      let w = workouts.filter(wi => wi.index !== index).sort((a, b) => a.index - b.index);
+      w = w.map((wi) => {
+        if (wi.index > index)
+          wi.index = wi.index - 1;
+        return { ...wi };
+      });
+      setWorkouts([...w]);
     }
   }
 
   const updateWorkout = ({ index, id, workoutData }: { index?: number, id?: string, workoutData: WorkoutData }) => {
     if (index) {
-      setWorkouts((w) => [...w.filter(wi => wi.index !== index), workoutData]);
+      let w = workouts.filter(wi => wi.index !== index);
+      w.splice(index - 1, 0, workoutData);
+      setWorkouts([...w]);
     } else if (id) {
-      setWorkouts((w) => [...w.filter(wi => wi.id !== id), workoutData]);
+      let i = workouts.filter(wi => wi.id === id)[0].index;
+      let w = workouts.filter(wi => wi.id !== id);
+      w.splice(i - 1, 0, workoutData);
+      setWorkouts([...w]);
     }
   }
   const addExercise = (index: number, exercise: ExerciseData) => {
