@@ -41,10 +41,13 @@ function WorkoutSchedule() {
       <div id={Styles.workouts} >
         {workouts.map((w) => {
           return <div key={w.id} >
-            <Workout index={w.index} />
-            <button onClick={() => { handleRemoveWorkout(w.index) }}>X</button>
-            <button onClick={() => { handleCopy(w.id) }}>C</button>
-            <button onClick={() => { handlePaste(w.id, w.index) }}>P</button>
+            <Workout index={w.index} >
+              <div id={Styles.controls} >
+                <button onClick={() => { handleRemoveWorkout(w.index) }}>X</button>
+                <button onClick={() => { handleCopy(w.id) }}>C</button>
+                <button onClick={() => { handlePaste(w.id, w.index) }}>P</button>
+              </div>
+            </Workout>
           </div>
         })}
       </div>

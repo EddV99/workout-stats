@@ -8,9 +8,10 @@ import { useWorkoutData } from "../../context/WorkoutDataContext";
 
 interface Props {
   index: number
+  children?: React.ReactNode
 };
 
-function Workout({ index }: Props) {
+function Workout({ index, children }: Props) {
   const { addWorkout, getWorkout, addExercise, removeExercise } = useWorkoutData();
   const nameInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -77,6 +78,7 @@ function Workout({ index }: Props) {
         </div>
         <button onClick={handleClick}>Add</button>
       </div>
+      {children}
     </div>
   );
 }
