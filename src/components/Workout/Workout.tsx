@@ -1,3 +1,4 @@
+import Styles from "./Workout.module.css";
 import { useEffect, useState } from "react";
 import { makeExercise } from "../../data/data";
 import { Muscle } from "../../data/body";
@@ -37,8 +38,8 @@ function Workout({ index }: Props) {
   if (!currentWorkout) return <div>Error: Finding Workout</div>;
 
   return (
-    <div>
-      <div>Day {index}</div>
+    <div id={Styles.workout}>
+      <h3>Day {index}</h3>
       {
         currentWorkout.exercises.length > 0 ?
           currentWorkout.exercises.map((e) => {
@@ -46,8 +47,11 @@ function Workout({ index }: Props) {
           })
           : <div>No exercises added yet</div>
       }
+      Name:
       <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+      Sets:
       <input onChange={(e) => setSets(e.target.valueAsNumber)} value={sets} placeholder="Sets" type="number" />
+      Reps:
       <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number" />
       <button onClick={handleClick}>Add</button>
     </div>

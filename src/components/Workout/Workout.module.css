@@ -1,0 +1,9 @@
+#workout{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+}

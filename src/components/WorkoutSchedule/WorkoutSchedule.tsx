@@ -1,3 +1,4 @@
+import Styles from "./WorkoutSchedule.module.css";
 import { useState } from "react";
 import { useWorkoutData } from "../../context/WorkoutDataContext";
 import EditText from "../EditText/EditText";
@@ -31,17 +32,19 @@ function WorkoutSchedule() {
   };
 
   return (
-    <div>
+    <div id={Styles.container} >
       <h1><EditText text={title} setText={setTitle} /></h1>
-      {workouts.map((w) => {
-        return <div key={w.id} >
-          <Workout index={w.index} />
-          <button onClick={() => { handleRemoveWorkout(w.index) }}>X</button>
-          <button onClick={() => { handleCopy(w.id) }}>C</button>
-          <button onClick={() => { handlePaste(w.id, w.index) }}>P</button>
-        </div>
-      })}
-      <button onClick={handleButton}>+</button>
+      <div id={Styles.workouts} >
+        {workouts.map((w) => {
+          return <div key={w.id} >
+            <Workout index={w.index} />
+            <button onClick={() => { handleRemoveWorkout(w.index) }}>X</button>
+            <button onClick={() => { handleCopy(w.id) }}>C</button>
+            <button onClick={() => { handlePaste(w.id, w.index) }}>P</button>
+          </div>
+        })}
+      </div>
+      <button onClick={handleButton}>Add a day</button>
     </div>
   );
 }
