@@ -2,7 +2,7 @@ export enum Muscle {
   CHEST = "Chest",
   LATS = "Lats",
   TRAPS = "Traps",
-  RHOMBOID = "Rhomboid",
+  NECK = "Neck",
   LOWER_BACK = "Lower Back",
   FRONT_DELTOID = "Front Deltoid",
   SIDE_DELTOID = "Side Deltoid",
@@ -15,6 +15,8 @@ export enum Muscle {
   GLUTES = "Glutes",
   QUADRICEPS = "Quadriceps",
   HAMSTRINGS = "Hamstrings",
+  ABDUCTORS = "Abductors",
+  ADDUCTORS = "Adductors",
   CALVES = "Calves",
   NONE = "None",
 }
@@ -28,7 +30,7 @@ export const UPPER_BODY = [
   Muscle.CHEST,
   Muscle.LATS,
   Muscle.TRAPS,
-  Muscle.RHOMBOID,
+  Muscle.NECK,
   Muscle.FRONT_DELTOID,
   Muscle.SIDE_DELTOID,
   Muscle.BACK_DELTOID,
@@ -42,4 +44,5 @@ export const LOWER_BODY = [
   Muscle.QUADRICEPS,
   Muscle.HAMSTRINGS,
   Muscle.CALVES,
+  Muscle.ABDUCTORS
 ];
