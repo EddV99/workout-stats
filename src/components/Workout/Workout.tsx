@@ -11,7 +11,7 @@ interface Props {
 };
 
 function Workout({ index }: Props) {
-  const { addWorkout, getWorkout, addExercise } = useWorkoutData();
+  const { addWorkout, getWorkout, addExercise, removeExercise } = useWorkoutData();
   const nameInputRef = useRef<HTMLInputElement | null>(null);
 
   const [name, setName] = useState("");
@@ -27,6 +27,10 @@ function Workout({ index }: Props) {
       setReps(0);
       nameInputRef.current?.focus();
     }
+  };
+
+  const handleRemoveExercise = (index: number, id: string) => {
+    removeExercise(index, id);
   };
 
   let currentWorkout = getWorkout({ index });
@@ -46,7 +50,12 @@ function Workout({ index }: Props) {
         {
           currentWorkout.exercises.length > 0 ?
             currentWorkout.exercises.map((e) => {
-              return <Exercise id={e.id} index={index} key={e.id} />
+              return (
+                <div key={e.id}>
+                  <Exercise id={e.id} index={index} />
+                  <button onClick={() => handleRemoveExercise(currentWorkout!.index, e.id)}>D</button>
+                </div>
+              )
             })
             : <div>No exercises added yet</div>
         }

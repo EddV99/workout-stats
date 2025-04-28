@@ -14,6 +14,7 @@ interface WorkoutContextType {
   updateWorkout: ({ }: { index?: number, id?: string, workoutData: WorkoutData }) => void
   getExercise: (id: string, index: number) => ExerciseData | undefined
   addExercise: (index: number, exercise: ExerciseData) => void
+  removeExercise: (index: number, id: string) => void
   updateExercise: (index: number, exercise: ExerciseData) => boolean
 }
 
@@ -153,6 +154,15 @@ export function WorkoutDataProvider({ id, children }: Props) {
     return true;
   }
 
+  const removeExercise = (index: number, id: string) => {
+    let search = workouts.filter((w) => w.index === index);
+    if (search) {
+      let workout = search[0];
+      workout.exercises.filter((e) => e.id !== id);
+      setWorkouts((w) => [...w.map((wi) => wi.index !== index ? wi : { ...wi, exercises: [...wi.exercises.filter(e => e.id !== id)] })])
+    }
+  };
+
   return (
     <WorkoutDataContext.Provider value={{
       workoutId: id,
@@ -166,6 +176,7 @@ export function WorkoutDataProvider({ id, children }: Props) {
       removeWorkout,
       getExercise,
       addExercise,
+      removeExercise,
       updateExercise
     }} >
       {children}
