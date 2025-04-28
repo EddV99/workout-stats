@@ -1,5 +1,5 @@
 import Styles from "./Workout.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { makeExercise } from "../../data/data";
 import { Muscle } from "../../data/body";
 import Exercise from "../Exercise/Exercise";
@@ -12,6 +12,7 @@ interface Props {
 
 function Workout({ index }: Props) {
   const { addWorkout, getWorkout, addExercise } = useWorkoutData();
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
 
   const [name, setName] = useState("");
   const [sets, setSets] = useState(0);
@@ -24,6 +25,7 @@ function Workout({ index }: Props) {
       setName("");
       setSets(0);
       setReps(0);
+      nameInputRef.current?.focus();
     }
   };
 
@@ -51,7 +53,7 @@ function Workout({ index }: Props) {
       </div>
       <div id={Styles.name} >
         Name:
-        <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+        <input ref={nameInputRef} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
       </div>
       <div id={Styles.sets} >
         Sets:
