@@ -25,7 +25,9 @@ function Workout({ index, children }: Props) {
 
   const handleClick = () => {
     if (name.trim().length > 0) {
-      const newExercise = makeExercise(name + Date.now().toString(), name, [], [], reps, sets);
+      const newExercise = makeExercise(name + Date.now().toString(), name, [...primaryMuscleGroup], [...secondaryMuscleGroup], reps, sets);
+      setPrimaryMuscleGroup([]);
+      setSecondaryMuscleGroup([]);
       addExercise(index, newExercise)
       setName("");
       setSets(0);

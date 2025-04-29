@@ -53,15 +53,16 @@ interface Props2 {
 };
 
 function MuscleGroup({ muscleGroup, selection, setSelection, children }: Props2) {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState<boolean>(selection.includes(muscleGroup));
 
   const handleClick = () => {
-    setSelected(p => !p);
-    if (selected) {
-      setSelection([...selection, muscleGroup]);
+    let newSelected = !selected;
+    if (newSelected) {
+      setSelection(p => [...p, muscleGroup]);
     } else {
-      setSelection([...selection.filter(g => g !== muscleGroup)]);
+      setSelection(p => [...p.filter(g => g !== muscleGroup)]);
     }
+    setSelected(newSelected);
   };
 
   return (
