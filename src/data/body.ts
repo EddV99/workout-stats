@@ -20,6 +20,7 @@ export enum Muscle {
   CALVES = "Calves",
   NONE = "None",
 }
+
 export const CORE_GROUP = [
   Muscle.ABDOMINALS,
   Muscle.OBLIQUES,
@@ -45,4 +46,25 @@ export const LOWER_BODY = [
   Muscle.HAMSTRINGS,
   Muscle.CALVES,
   Muscle.ABDUCTORS
+];
+
+export const ALL_MUSCLE = [
+  Muscle.ABDOMINALS,
+  Muscle.OBLIQUES,
+  Muscle.LOWER_BACK,
+  Muscle.GLUTES,
+  Muscle.QUADRICEPS,
+  Muscle.HAMSTRINGS,
+  Muscle.CALVES,
+  Muscle.ABDUCTORS,
+  Muscle.CHEST,
+  Muscle.LATS,
+  Muscle.TRAPS,
+  Muscle.NECK,
+  Muscle.FRONT_DELTOID,
+  Muscle.SIDE_DELTOID,
+  Muscle.BACK_DELTOID,
+  Muscle.BICEPS,
+  Muscle.TRICEPS,
+  Muscle.FOREARMS,
 ];

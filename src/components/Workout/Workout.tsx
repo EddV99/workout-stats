@@ -4,6 +4,7 @@ import { makeExercise } from "../../data/data";
 import { Muscle } from "../../data/body";
 import Exercise from "../Exercise/Exercise";
 import { useWorkoutData } from "../../context/WorkoutDataContext";
+import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
 
 
 interface Props {
@@ -16,7 +17,8 @@ function Workout({ index, children }: Props) {
   const { addWorkout, getWorkout, addExercise, removeExercise } = useWorkoutData();
   const nameInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [muscleGroups, setMuscleGroups] = useState({ primary: [], secondary: [] });
+  const [primaryMuscleGroup, setPrimaryMuscleGroup] = useState<Muscle[]>([]);
+  const [secondaryMuscleGroup, setSecondaryMuscleGroup] = useState<Muscle[]>([]);
   const [name, setName] = useState("");
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
@@ -77,6 +79,8 @@ function Workout({ index, children }: Props) {
             Reps:
             <input onChange={(e) => setReps(e.target.valueAsNumber)} value={reps} placeholder="Reps" type="number" />
           </div>
+          <MuscleGroupSelection label="Primary Muscles" selection={primaryMuscleGroup} setSelection={setPrimaryMuscleGroup} />
+          <MuscleGroupSelection label="Secondary Muscles" selection={secondaryMuscleGroup} setSelection={setSecondaryMuscleGroup} />
         </div>
         <button onClick={handleClick}>Add</button>
       </div>
