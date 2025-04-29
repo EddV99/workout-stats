@@ -20,9 +20,9 @@ function MuscleGroupSelection({ label, selection, setSelection }: Props) {
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("mouseup", handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("mouseup", handleOutsideClick);
     };
   }, []);
 
