@@ -13,4 +13,4 @@ workout.
  
 ## Dataset
 The dataset of exercise data used was parsed and modified from
-[exercises.json](git@github.com:wrkout/exercises.json.git)
+[exercises.json](https://github.com/wrkout/exercises.json)
