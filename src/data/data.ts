@@ -14,7 +14,8 @@ export interface WorkoutData {
 export interface ExerciseData {
   id: string;
   name: string;
-  group: Muscle;
+  primary: Muscle[];
+  secondary: Muscle[];
   reps: number;
   sets: number;
 }
@@ -23,6 +24,6 @@ export function makeWorkout(id: string, index: number, exercises: ExerciseData[]
   return { id, index, exercises };
 }
 
-export function makeExercise(id: string, name: string, group: Muscle, reps: number, sets: number): ExerciseData {
-  return { id, name, group, reps, sets };
+export function makeExercise(id: string, name: string, primary: Muscle[], secondary: Muscle[], reps: number, sets: number): ExerciseData {
+  return { id, name, primary, secondary, reps, sets };
 }

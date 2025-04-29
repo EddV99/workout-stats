@@ -11,17 +11,19 @@ interface Props {
   children?: React.ReactNode
 };
 
+
 function Workout({ index, children }: Props) {
   const { addWorkout, getWorkout, addExercise, removeExercise } = useWorkoutData();
   const nameInputRef = useRef<HTMLInputElement | null>(null);
 
+  const [muscleGroups, setMuscleGroups] = useState({ primary: [], secondary: [] });
   const [name, setName] = useState("");
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
 
   const handleClick = () => {
     if (name.trim().length > 0) {
-      const newExercise = makeExercise(name + Date.now().toString(), name, Muscle.NONE, reps, sets);
+      const newExercise = makeExercise(name + Date.now().toString(), name, [], [], reps, sets);
       addExercise(index, newExercise)
       setName("");
       setSets(0);

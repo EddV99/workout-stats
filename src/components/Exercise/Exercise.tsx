@@ -19,7 +19,8 @@ function Exercise({ id, index }: Props) {
     name: exercise.name,
     sets: exercise.sets,
     reps: exercise.reps,
-    group: exercise.group
+    primary: exercise.primary,
+    secondary: exercise.secondary
   });
 
 
@@ -34,13 +35,14 @@ function Exercise({ id, index }: Props) {
       name: exercise.name,
       sets: exercise.sets,
       reps: exercise.reps,
-      group: exercise.group
+      primary: exercise.primary,
+      secondary: exercise.secondary,
     })
   };
 
   const handleClickConfirm = () => {
     setEdit(false);
-    updateExercise(index, makeExercise(id, exerciseEdit.name, exerciseEdit.group, exerciseEdit.reps, exerciseEdit.sets));
+    updateExercise(index, makeExercise(id, exerciseEdit.name, exerciseEdit.primary, exerciseEdit.secondary, exerciseEdit.reps, exerciseEdit.sets));
   };
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
