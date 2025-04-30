@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import { ALL_MUSCLE, Muscle } from "../../data/body";
 
 
-// Need:
 // - reps
 // - sets
 // - rest time
@@ -26,8 +25,10 @@ function DetailsPage() {
 function Content() {
   const { title } = useWorkoutData();
   return (
-    <div id={Styles.container}>
-      Analytics for {title}
+    <div id={Styles.container} >
+      <div id={Styles.title}>
+        Analytics for {title}
+      </div>
       <Analytics />
     </div>
   );
@@ -37,6 +38,8 @@ function Analytics() {
   const { workouts } = useWorkoutData();
 
   const data = new Map<Muscle, { reps: number, sets: number, rest: number }>();
+
+  // parse data
   workouts.forEach(w => {
     w.exercises.forEach(e => {
       e.primary.forEach(p => {
@@ -58,10 +61,10 @@ function Analytics() {
     });
   });
 
-  return <div>
+  return <div id={Styles.wrapper}>
     {ALL_MUSCLE.map((mg) => {
       return data.has(mg) ? (
-        <div>
+        <div id={Styles.group} key={mg}>
           <div>{mg}</div>
           <div>Sets: {data.get(mg)?.sets}</div>
           <div>Reps: {data.get(mg)?.reps}</div>

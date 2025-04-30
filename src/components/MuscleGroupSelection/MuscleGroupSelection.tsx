@@ -2,15 +2,14 @@ import Styles from "./MuscleGroupSelection.module.css";
 import { useEffect, useRef, useState } from "react";
 import { ALL_MUSCLE, Muscle } from "../../data/body";
 
-interface Props {
+interface SelectionProps {
   label: string,
   selection: Muscle[],
   setSelection: React.Dispatch<React.SetStateAction<Muscle[]>>,
 };
 
-function MuscleGroupSelection({ label, selection, setSelection }: Props) {
+function MuscleGroupSelection({ label, selection, setSelection }: SelectionProps) {
   const [open, setOpen] = useState(false);
-
   const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ function MuscleGroupSelection({ label, selection, setSelection }: Props) {
           {ALL_MUSCLE.map((m) => {
             return (
               <MuscleGroup key={m.toString()} muscleGroup={m} selection={selection} setSelection={setSelection}>
-                {m.toString().toUpperCase().substring(0, 2)}
+                {m.toString().toUpperCase()}
               </MuscleGroup>
             )
           })}
@@ -45,14 +44,14 @@ function MuscleGroupSelection({ label, selection, setSelection }: Props) {
   );
 }
 
-interface Props2 {
+interface MuscleGroupProps {
   muscleGroup: Muscle,
   selection: Muscle[],
   setSelection: React.Dispatch<React.SetStateAction<Muscle[]>>,
   children: React.ReactNode
 };
 
-function MuscleGroup({ muscleGroup, selection, setSelection, children }: Props2) {
+function MuscleGroup({ muscleGroup, selection, setSelection, children }: MuscleGroupProps) {
   const [selected, setSelected] = useState<boolean>(selection.includes(muscleGroup));
 
   const handleClick = () => {
