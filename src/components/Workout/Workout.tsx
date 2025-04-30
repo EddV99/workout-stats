@@ -5,6 +5,8 @@ import { Muscle } from "../../data/body";
 import Exercise from "../Exercise/Exercise";
 import { useWorkoutData } from "../../context/WorkoutDataContext";
 import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
+import { data } from "../../data/workout-data.ts";
+import { bool } from "three/tsl";
 
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
 function Workout({ index, children }: Props) {
   const { addWorkout, getWorkout, addExercise, removeExercise } = useWorkoutData();
   const nameInputRef = useRef<HTMLInputElement | null>(null);
+  const [nameInputFocus, setNameInputFocus] = useState(false);
 
   const [primaryMuscleGroup, setPrimaryMuscleGroup] = useState<Muscle[]>([]);
   const [secondaryMuscleGroup, setSecondaryMuscleGroup] = useState<Muscle[]>([]);
@@ -71,7 +74,8 @@ function Workout({ index, children }: Props) {
         <div>
           <div id={Styles.name} >
             Name:
-            <input ref={nameInputRef} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+            <input ref={nameInputRef} onFocus={() => setNameInputFocus(true)} onBlur={() => setNameInputFocus(false)} onChange={(e) => setName(e.target.value)} value={name} placeholder="Name" />
+            <ExerciseSearch name={name} focused={nameInputFocus} />
           </div>
           <div id={Styles.sets} >
             Sets:
@@ -87,6 +91,23 @@ function Workout({ index, children }: Props) {
         <button onClick={handleClick}>Add</button>
       </div>
       {children}
+    </div>
+  );
+}
+
+function ExerciseSearch({ name, focused }: { name: string, focused: boolean }) {
+  let first = true;
+  return (
+    <div id={Styles.search} >
+      {data.filter(e => name.trim().length !== 0 && e.name.includes(name)).map((w) => {
+        let style = !first ? Styles.result : "";
+        first = false;
+        return (
+          <div id={style}>
+            {w.name}
+          </div>
+        )
+      })}
     </div>
   );
 }
