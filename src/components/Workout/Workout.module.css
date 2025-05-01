@@ -45,9 +45,11 @@
   background-color: #eeeeee;
   gap: 15px;
   width: fit-content;
+  max-height: 250px;
   top: 100%;
   border: 1px solid;
   border-radius: 5px;
+  overflow-y: scroll;
 }
 
 #hidden{

@@ -1,12 +1,13 @@
 import Styles from "./Workout.module.css";
 import { useEffect, useRef, useState } from "react";
-import { ExerciseData, makeExercise, WorkoutData } from "../../data/data";
+import { makeExercise, WorkoutData } from "../../data/data";
 import { Muscle } from "../../data/body";
 import Exercise from "../Exercise/Exercise";
 import { useWorkoutData } from "../../context/WorkoutDataContext";
 import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
 import { data } from "../../data/workout-data.ts";
-
+import fuse from "fuse.js";
+import Fuse from "fuse.js";
 
 interface Props {
   index: number
@@ -16,7 +17,6 @@ interface Props {
 
 function Workout({ index, children }: Props) {
   const { addWorkout, getWorkout, removeExercise } = useWorkoutData();
-
   let currentWorkout = getWorkout({ index });
   useEffect(() => {
     if (!currentWorkout) {
@@ -149,18 +149,23 @@ function ExerciseSearch({ name, show, ref, setShow, handleChoice }: {
 }) {
   if (name.trim().length === 0 || !show) return <></>;
 
+  const fuseOptions = {
+    keys: ["name"]
+  };
+  const fuse = new Fuse(data, fuseOptions);
+
   let first = true;
   return (
     <div id={Styles.search} ref={ref} >
-      {data.filter(e => e.name.includes(name)).splice(0, 5).map((w) => {
+      {fuse.search(name).map((w) => {
         let style = !first ? Styles.topBorder : "";
         first = false;
         return (
-          <div id={Styles.result} className={style} key={w.name} onClick={() => {
-            handleChoice(w);
+          <div id={Styles.result} className={style} key={w.item.name} onClick={() => {
+            handleChoice(w.item);
             setShow(false);
           }}>
-            {w.name}
+            {w.item.name}
           </div>
         )
       })}
