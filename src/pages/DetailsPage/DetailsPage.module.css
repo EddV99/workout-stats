@@ -14,13 +14,28 @@
   border-radius: 5px;
 }
 
-#group {
+#group, #groupEmpty {
   box-sizing: border-box;
   padding: 10px;
   border: 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#groupEmpty {
+  background-color: #eeeeee;
+}
+
+#name {
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border-bottom: 1px dotted;
+  width: 90%;
+  text-align: center;
 }
 
 #title {
