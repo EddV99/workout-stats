@@ -6,7 +6,6 @@ import Exercise from "../Exercise/Exercise";
 import { useWorkoutData } from "../../context/WorkoutDataContext";
 import MuscleGroupSelection from "../MuscleGroupSelection/MuscleGroupSelection";
 import { data } from "../../data/workout-data.ts";
-import fuse from "fuse.js";
 import Fuse from "fuse.js";
 
 interface Props {
