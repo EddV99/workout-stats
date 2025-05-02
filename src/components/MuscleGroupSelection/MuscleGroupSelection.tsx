@@ -38,7 +38,7 @@ function MuscleGroupSelection({ label, selection, setSelection }: SelectionProps
           })}
         </div>
       )
-        : <>{label}</>
+        : <div id={Styles.labelContainer}>{label}<div id={Styles.count}>{selection.length}</div></div>
       }
     </div >
   );
