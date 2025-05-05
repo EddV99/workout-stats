@@ -53,42 +53,44 @@ function Analytics() {
 
   // parse data
   workouts.forEach(w => {
-    w.exercises.forEach(e => {
-      e.primary.forEach(p => {
-        let v = data.get(p);
-        if (!v)
-          v = {
-            totalReps: 0, totalSets: 0, totalRest: 0,
-            primaryReps: 0, primarySets: 0, primaryRest: 0,
-            secondaryReps: 0, secondarySets: 0, secondaryRest: 0,
-            workoutNamesAsPrimary: new Set<String>(),
-            workoutNamesAsSecondary: new Set<String>(),
-          };
-        v.totalReps += e.reps;
-        v.totalSets += e.sets;
-        v.primaryReps += e.reps;
-        v.primarySets += e.sets;
-        v.workoutNamesAsPrimary.add(e.name);
-        data.set(p, v);
+    if (!w.restDay) {
+      w.exercises.forEach(e => {
+        e.primary.forEach(p => {
+          let v = data.get(p);
+          if (!v)
+            v = {
+              totalReps: 0, totalSets: 0, totalRest: 0,
+              primaryReps: 0, primarySets: 0, primaryRest: 0,
+              secondaryReps: 0, secondarySets: 0, secondaryRest: 0,
+              workoutNamesAsPrimary: new Set<String>(),
+              workoutNamesAsSecondary: new Set<String>(),
+            };
+          v.totalReps += e.reps;
+          v.totalSets += e.sets;
+          v.primaryReps += e.reps;
+          v.primarySets += e.sets;
+          v.workoutNamesAsPrimary.add(e.name);
+          data.set(p, v);
+        });
+        e.secondary.forEach(s => {
+          let v = data.get(s);
+          if (!v)
+            v = {
+              totalReps: 0, totalSets: 0, totalRest: 0,
+              primaryReps: 0, primarySets: 0, primaryRest: 0,
+              secondaryReps: 0, secondarySets: 0, secondaryRest: 0,
+              workoutNamesAsPrimary: new Set<String>(),
+              workoutNamesAsSecondary: new Set<String>(),
+            };
+          v.totalReps += e.reps;
+          v.totalSets += e.sets;
+          v.secondaryReps += e.reps;
+          v.secondarySets += e.sets;
+          v.workoutNamesAsSecondary.add(e.name);
+          data.set(s, v);
+        });
       });
-      e.secondary.forEach(s => {
-        let v = data.get(s);
-        if (!v)
-          v = {
-            totalReps: 0, totalSets: 0, totalRest: 0,
-            primaryReps: 0, primarySets: 0, primaryRest: 0,
-            secondaryReps: 0, secondarySets: 0, secondaryRest: 0,
-            workoutNamesAsPrimary: new Set<String>(),
-            workoutNamesAsSecondary: new Set<String>(),
-          };
-        v.totalReps += e.reps;
-        v.totalSets += e.sets;
-        v.secondaryReps += e.reps;
-        v.secondarySets += e.sets;
-        v.workoutNamesAsSecondary.add(e.name);
-        data.set(s, v);
-      });
-    });
+    }
   });
 
   return <div id={Styles.wrapper}>

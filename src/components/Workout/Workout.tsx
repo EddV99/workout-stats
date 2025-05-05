@@ -27,7 +27,7 @@ function Workout({ index, children }: Props) {
   if (!currentWorkout) return <div>Error: Finding Workout</div>;
 
   return (
-    <div id={Styles.workout}>
+    <div id={Styles.workout} className={currentWorkout.restDay ? Styles.grey : ""}>
       <WorkoutInfo workout={currentWorkout} handleRemoveExercise={removeExercise} />
       <AddExercise index={index} />
       {children}
@@ -36,8 +36,16 @@ function Workout({ index, children }: Props) {
 }
 
 function WorkoutInfo({ workout, handleRemoveExercise }: { workout: WorkoutData, handleRemoveExercise: (index: number, id: string) => void }) {
+  const { updateWorkout } = useWorkoutData();
+  const handleRestButton = () => {
+    updateWorkout({ id: workout.id, workoutData: { ...workout, restDay: !workout.restDay } });
+  };
+
   return <>
-    <h3>Day {workout.index}</h3>
+    <div id={Styles.header}>
+      <h3>Day {workout.index}</h3>
+      <div id={Styles.restButton} onClick={handleRestButton}>REST</div>
+    </div>
     <div id={Styles.exercises} >
       {
         workout.exercises.length > 0 ?

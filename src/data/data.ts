@@ -8,6 +8,7 @@ export interface InternalData {
 export interface WorkoutData {
   id: string;
   index: number;
+  restDay: boolean;
   exercises: ExerciseData[];
 }
 
@@ -20,8 +21,8 @@ export interface ExerciseData {
   sets: number;
 }
 
-export function makeWorkout(id: string, index: number, exercises: ExerciseData[]): WorkoutData {
-  return { id, index, exercises };
+export function makeWorkout(id: string, index: number, exercises: ExerciseData[], restDay: boolean = false): WorkoutData {
+  return { id, index, restDay, exercises };
 }
 
 export function makeExercise(id: string, name: string, primary: Muscle[], secondary: Muscle[], reps: number, sets: number): ExerciseData {
