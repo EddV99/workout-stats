@@ -18,6 +18,7 @@ export enum Muscle {
   ABDUCTORS = "Abductors",
   ADDUCTORS = "Adductors",
   CALVES = "Calves",
+  HEART = "Heart",
   NONE = "None",
 }
 
@@ -45,7 +46,8 @@ export const LOWER_BODY = [
   Muscle.QUADRICEPS,
   Muscle.HAMSTRINGS,
   Muscle.CALVES,
-  Muscle.ABDUCTORS
+  Muscle.ABDUCTORS,
+  Muscle.ADDUCTORS,
 ];
 
 export const ALL_MUSCLE = [
@@ -68,4 +70,5 @@ export const ALL_MUSCLE = [
   Muscle.BICEPS,
   Muscle.TRICEPS,
   Muscle.FOREARMS,
+  Muscle.HEART,
 ];
