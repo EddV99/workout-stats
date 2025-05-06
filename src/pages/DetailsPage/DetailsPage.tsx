@@ -39,23 +39,27 @@ function Analytics() {
       </div>
       <div id={Styles.wrapper}>
         {ALL_MUSCLE.map((mg) => {
-          return muscleData.has(mg) ? (
+          let m = muscleData.get(mg);
+          let hitDirectly = (m?.primarySets || 0) > 0 || (m?.primaryReps || 0) > 0;
+
+          return m ? (
             <div id={Styles.group} key={mg}>
               <div id={Styles.primary}>
                 <div id={Styles.name}>{mg}</div>
-                <div>Total Sets: {muscleData.get(mg)?.totalSets}</div>
-                <div>Total Reps: {muscleData.get(mg)?.totalReps}</div>
-                <div>Primary Target Sets: {muscleData.get(mg)?.primarySets}</div>
-                <div>Primary Target Reps: {muscleData.get(mg)?.primaryReps}</div>
-                <div>Secondary Target Sets: {muscleData.get(mg)?.secondarySets}</div>
-                <div>Secondary Target Reps: {muscleData.get(mg)?.secondaryReps}</div>
+                <div>Total Sets: {m.totalSets}</div>
+                <div>Total Reps: {m.totalReps}</div>
+                <div>Primary Target Sets: {m.primarySets}</div>
+                <div>Primary Target Reps: {m.primaryReps}</div>
+                <div>Secondary Target Sets: {m.secondarySets}</div>
+                <div>Secondary Target Reps: {m.secondaryReps}</div>
+                <div>Average Rest Time: {hitDirectly ? `${m.avgRestTime} day(s)` : "N/A"}</div>
               </div>
               <div>
                 <div id={Styles.primary}>
                   <div className={Styles.underline}>Directly Hit With</div>
                   <div id={Styles.workouts}>
                     {Array.from(muscleData.get(mg)?.workoutNamesAsPrimary || []).map((d) => {
-                      return <div>{d}</div>;
+                      return <div key={d.toString()}>{d}</div>;
                     })}
                   </div>
                 </div>
@@ -64,7 +68,7 @@ function Analytics() {
                   <div className={Styles.underline}>In-Directly Hit With</div>
                   <div id={Styles.workouts}>
                     {Array.from(muscleData.get(mg)?.workoutNamesAsSecondary || []).map((d) => {
-                      return <div>{d}</div>;
+                      return <div key={d.toString()}>{d}</div>;
                     })}
                   </div>
                 </div>

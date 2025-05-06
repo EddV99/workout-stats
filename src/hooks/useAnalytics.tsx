@@ -38,14 +38,48 @@ function useAnalytics(workouts: WorkoutData[]) {
   let restDays = 0;
 
 
+  const calculateAvgRestTime = (muscle: Muscle): number => {
+    let indices: number[] = [];
+
+    workouts.forEach((w, i) => {
+      w.exercises.forEach((e) => {
+        if (e.primary.includes(muscle) && !indices.includes(i)) {
+          indices.push(i);
+        }
+      });
+    });
+    if (muscle === Muscle.QUADRICEPS) {
+      console.log(indices);
+    }
+
+    let sum = 0;
+    // x x x A
+    for (let i = 0; i < indices.length; i++) {
+      if (i + 1 < indices.length) {
+        sum += (indices[i + 1] - indices[i]) - 1;
+      } else {
+        sum += (workouts.length - indices.length);
+      }
+    }
+    sum /= indices.length;
+    return sum;
+  };
+
   // parse data
+  let workedOutPrimary = new Set<Muscle>();
   workouts.forEach(w => {
     if (!w.restDay) {
       w.exercises.forEach(e => {
         e.primary.forEach(p => {
+
           let v = muscleData.get(p);
           if (!v)
             v = newData();
+
+          if (!workedOutPrimary.has(p)) {
+            v.avgRestTime = calculateAvgRestTime(p);
+            workedOutPrimary.add(p);
+          }
 
           v.totalReps += e.reps;
           v.totalSets += e.sets;
