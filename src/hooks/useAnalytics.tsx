@@ -37,7 +37,6 @@ function useAnalytics(workouts: WorkoutData[]) {
   const muscleData = new Map<Muscle, Data>();
   let restDays = 0;
 
-
   const calculateAvgRestTime = (muscle: Muscle): number => {
     let indices: number[] = [];
 
@@ -48,19 +47,17 @@ function useAnalytics(workouts: WorkoutData[]) {
         }
       });
     });
-    if (muscle === Muscle.QUADRICEPS) {
-      console.log(indices);
-    }
 
     let sum = 0;
-    // x x x A
     for (let i = 0; i < indices.length; i++) {
       if (i + 1 < indices.length) {
         sum += (indices[i + 1] - indices[i]) - 1;
       } else {
-        sum += (workouts.length - indices.length);
+        sum += ((workouts.length - 1) - indices[i]);
       }
     }
+    sum += indices[0];
+
     sum /= indices.length;
     return sum;
   };
