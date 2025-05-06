@@ -4,6 +4,7 @@ Put in your daily workout and view detailed analytics about it. Use it to plan o
 workout.
 
 ## Planned
+- Styling
 - 3D Viewer
 - Graph Viewer
 - Easier Controls
