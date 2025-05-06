@@ -81,8 +81,6 @@ function AddExercise({ index }: { index: number }) {
       setSecondaryMuscleGroup([]);
       addExercise(index, newExercise)
       setName("");
-      setSets(0);
-      setReps(0);
       nameInputRef.current?.focus();
     }
   };
