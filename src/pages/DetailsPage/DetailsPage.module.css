@@ -8,12 +8,19 @@
   flex-direction: column;
 }
 
-#wrapper {
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2.0rem;
   align-items: center;
-  border-radius: 5px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }
 
 #group, #groupEmpty {
@@ -57,4 +64,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#viewTypesContainer{
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
 }
